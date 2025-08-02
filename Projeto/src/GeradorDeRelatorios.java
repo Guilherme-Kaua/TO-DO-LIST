@@ -19,7 +19,7 @@ public class GeradorDeRelatorios {
             }
         }
         if (contador == 0){
-            throw new Exception();
+            throw new Exception("Não é possível mandar um pdf sem tarefas");
         }
 
         Document doc = new Document(PageSize.A4);
