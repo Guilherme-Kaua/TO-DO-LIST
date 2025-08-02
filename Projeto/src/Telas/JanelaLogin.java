@@ -12,7 +12,7 @@ public class JanelaLogin {
 
 
     public static void main(String[] args) {
-        JFrame janela = new JFrame();
+        JFrame janela = new JFrame("Lista de Tarefas");
 
         janela.setSize( 550,400);
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class JanelaCadastro {
     public static void main(String[] args) {
-        JFrame janelaCadastro = new JFrame();
+        JFrame janelaCadastro = new JFrame("Lista de Tarefas");
 
         janelaCadastro.setSize(550, 400);
         janelaCadastro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
