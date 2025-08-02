@@ -7,6 +7,10 @@ import java.io.*;
 
 public class Persistencia {
 
+    public void XStream(XStream obj){
+        obj.addPermission(AnyTypePermission.ANY);
+        System.out.println("Deu certo");
+    }
     //cria o objeto xstream para converter outros objetos
     private XStream xstream = new XStream(new DomDriver());
 
@@ -14,7 +18,7 @@ public class Persistencia {
     private File arquivo = new File("central.xml");
 
     public void salvarCentral(CentralDeInformacoes central) throws IOException {
-        xstream.addPermission(AnyTypePermission.ANY);
+
         //convertendo objeto em uma String em formato xml
         String xml = xstream.toXML(central);
 
