@@ -8,11 +8,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
         Persistencia persistencia = new Persistencia();
-        CentralDeInformacoes central = new CentralDeInformacoes();
+        CentralDeInformacoes central = persistencia.recuperarCentral();
 
         loop:
         while (true) {
-            persistencia.recuperarCentral();
             System.out.println(
                     "1 - nova tarefa\n" +
                             "2 - listar todas as tarefas\n" +
@@ -43,7 +42,6 @@ public class Main {
                                 )
                         );
                         central.adicionarTarefa(tarefa);
-                        persistencia.salvarCentral(central);
                     } catch (Exception e) {
                         TratarErrosException.imprimirErroFormatado(e);
                     }
@@ -66,7 +64,7 @@ public class Main {
                     System.out.println("Digite o ID da tarefa que procura:");
                     try {
                         long pesquisa = input.nextLong();
-                        System.out.println(persistencia.recuperarCentral().recuperarTarefaPorId(pesquisa));
+                        System.out.println(central.recuperarTarefaPorId(pesquisa));
                     } catch (Exception e) {
                         TratarErrosException.imprimirErroFormatado(e);
                     }
@@ -113,6 +111,7 @@ public class Main {
                     break;
                 case "s":
                     input.close();
+                    persistencia.salvarCentral(central);
                     System.out.println("Obrigado por usar. Saindo...");
                     break loop;
 

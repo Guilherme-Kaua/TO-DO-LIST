@@ -3,15 +3,9 @@
 
 # Log file
 *.log
-hs_err_pid*
-replay_pid*
 
 # BlueJ files
 *.ctxt
-
-# Arquivos gerados pelo sistema operacional
-.DS_Store
-Thumbs.db
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -28,18 +22,3 @@ Thumbs.db
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
-
-# Arquivos gerados pelo projeto
-/Relatorio.pdf
-/central.xml
-
-
-# Arquivos de configuração da IDE (IntelliJ)
-.idea/workspace.xml
-.idea/libraries/
-*.iml
-
-# Diretórios de build do Maven e IntelliJ
-/out/
-/target/
-.idea/shelf/
