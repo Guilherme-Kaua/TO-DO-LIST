@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class CentralDeInformacoes {
-    ArrayList<Tarefa> todasAsTarefas = new ArrayList<Tarefa>();
+    protected ArrayList<Tarefa> todasAsTarefas = new ArrayList<Tarefa>();
 
     public boolean adicionarTarefa(Tarefa obj){
         for (Tarefa valor: todasAsTarefas) {

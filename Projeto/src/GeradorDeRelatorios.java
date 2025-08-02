@@ -9,7 +9,8 @@ import java.time.LocalDate;
 
 public class GeradorDeRelatorios {
 
-    public static void obterTarefasDeUmDia(LocalDate data, CentralDeInformacoes central){
+
+    public static <LocalDate> void obterTarefasDeUmDia(LocalDate data, CentralDeInformacoes central) throws Exception {
 
         int contador = 0;
         for (Tarefa tarefa: central.todasAsTarefas){
@@ -18,8 +19,7 @@ public class GeradorDeRelatorios {
             }
         }
         if (contador == 0){
-            System.out.println("Não existe nenhuma tarefa em "+data+", por isso nenhum PDF foi gerado");
-            return;
+            throw new Exception();
         }
 
         Document doc = new Document(PageSize.A4);
