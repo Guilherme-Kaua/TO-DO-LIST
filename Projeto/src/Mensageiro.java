@@ -18,7 +18,7 @@ import java.util.Properties;
 
 
 public class Mensageiro {
-    public void enviarEmailComPdf(String email, LocalDate data, CentralDeInformacoes central) {
+    public void enviarEmailComPdf(String email, LocalDate data, CentralDeInformacoes central) throws Exception {
         // Configuração do servidor SMTP
         String host = "smtp.gmail.com";
         final String username = "testedeemailspdfs@gmail.com";
@@ -74,11 +74,9 @@ public class Mensageiro {
 
             // Envia o e-mail
             Transport.send(message);
-            System.out.println("Email enviado com sucesso!");
 
         } catch (Exception e) {
-            System.out.println("Falha ao enviar e-mail:");
-            e.printStackTrace();
+            throw new Exception("Falha ao enviar e-mail:");
         }
     }
 }
