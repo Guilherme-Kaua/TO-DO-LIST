@@ -34,7 +34,6 @@ public class JanelaLogin {
 
 
         JLabel labelNomeUsuario = new JLabel("Nome:");
-
         labelNomeUsuario.setFont(new Font("tahoma", Font.PLAIN, 22));
         labelNomeUsuario.setBounds(100,120,100,30);
         janela.add(labelNomeUsuario);
@@ -44,7 +43,6 @@ public class JanelaLogin {
         janela.add(jtNome);
 
         JLabel labelEmail = new JLabel("Email:");
-
         labelEmail.setFont(new Font("tahoma", Font.PLAIN, 22));
         labelEmail.setBounds(100,170,100,30);
         janela.add(labelEmail);
@@ -56,7 +54,6 @@ public class JanelaLogin {
 
         JButton botaoLogin = new JButton("Login");
         botaoLogin.setBounds(150,246,130,30);
-
         janela.add(botaoLogin);
 
         JButton botaoCadastrar= new JButton("Cadastrar");
