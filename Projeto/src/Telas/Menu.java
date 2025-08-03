@@ -1,6 +1,7 @@
 package Telas;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class Menu {
@@ -17,26 +18,20 @@ public class Menu {
         janelaMenu.add(labelTitulo, BorderLayout.NORTH);
 
 
-        JButton botaoTarefas= new JButton("Tarefas");
-        botaoTarefas.setFont(new Font("Tahoma", Font.PLAIN,35));
-
-        JPanel painelesquerda = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        painelesquerda.add(botaoTarefas);
-        janelaMenu.add(painelesquerda, BorderLayout.WEST);
+        JButton botaoTarefas = new JButton("Tarefas");
+        botaoTarefas.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        botaoTarefas.setFocusPainted(false);
 
 
-
-
-
-
-        //JPanel painelTarefas = new JPanel();
-        //janelaMenu.add(painelTarefas,BorderLayout.CENTER);
+        JPanel painelCentral = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        painelCentral.setBorder(new EmptyBorder(50, 0, 0, 0));
+        painelCentral.add(botaoTarefas);
 
 
 
 
 
-
+        janelaMenu.add(painelCentral, BorderLayout.CENTER);
         janelaMenu.setVisible(true);
     }
 }
