@@ -22,13 +22,34 @@ public class Menu {
         botaoTarefas.setFont(new Font("Tahoma", Font.PLAIN, 25));
         botaoTarefas.setFocusPainted(false);
 
+        JButton botaoEventos = new JButton("Eventos");
+        botaoEventos.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        botaoEventos.setFocusPainted(false);
 
-        JPanel painelCentral = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton botaoRelatorios = new JButton("Relatorios");
+        botaoRelatorios.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        botaoRelatorios.setFocusPainted(false);
+
+        JButton botaoSair = new JButton("Sair");
+        botaoSair.setFont(new Font("Tahoma", Font.PLAIN, 25));
+        botaoSair.setFocusPainted(false);
+
+        JPanel painelCentral = new JPanel();
+        painelCentral.setLayout(new BoxLayout(painelCentral, BoxLayout.Y_AXIS));
         painelCentral.setBorder(new EmptyBorder(50, 0, 0, 0));
+        painelCentral.add(botaoEventos);
+        painelCentral.add(Box.createVerticalStrut(20));
         painelCentral.add(botaoTarefas);
+        painelCentral.add(Box.createVerticalStrut(20));
+        painelCentral.add(botaoRelatorios);
+        painelCentral.add(Box.createVerticalStrut(20));
+        painelCentral.add(botaoSair);
 
-
-
+        botaoEventos.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botaoTarefas.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botaoRelatorios.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botaoRelatorios.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botaoSair.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
         janelaMenu.add(painelCentral, BorderLayout.CENTER);
