@@ -13,7 +13,7 @@ public class GeradorDeRelatorios {
     public static <LocalDate> void obterTarefasDeUmDia(LocalDate data, CentralDeInformacoes central) throws Exception {
 
         int contador = 0;
-        for (Tarefa tarefa: central.retodasAsTarefas){
+        for (Tarefa tarefa: central.todasAsTarefas){
             if (tarefa.getDeadline().equals(data)){
                 contador++;
             }
