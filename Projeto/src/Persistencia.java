@@ -12,7 +12,7 @@ public class Persistencia {
         System.out.println("Deu certo");
     }
     //cria o objeto xstream para converter outros objetos
-    private XStream xstream = new XStream(new DomDriver());
+    private final XStream xstream = new XStream(new DomDriver());
 
     //cria o arquivo
     private File arquivo = new File("central.xml");

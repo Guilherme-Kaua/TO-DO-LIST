@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CentralDeInformacoes {
-    protected ArrayList<Tarefa> todasAsTarefas = new ArrayList<Tarefa>();
+    private ArrayList<Tarefa> todasAsTarefas = new ArrayList<Tarefa>();
 
     public boolean adicionarTarefa(Tarefa obj){
         for (Tarefa valor: todasAsTarefas) {
@@ -26,12 +26,8 @@ public class CentralDeInformacoes {
 
     public void getTodasAsTarefas() {
         for (Tarefa valor: todasAsTarefas){
-            System.out.println(valor);
+            System.out.println(valor);;
         }
     }
 
-
-    public void setTodasAsTarefas(ArrayList<Tarefa> todasAsTarefas) {
-        this.todasAsTarefas = todasAsTarefas;
-    }
 }
