@@ -24,9 +24,9 @@ public class CentralDeInformacoes {
     }
 
 
-    public void getTodasAsTarefas() {
+    public void getTarefas() {
         for (Tarefa valor: todasAsTarefas){
-            System.out.println(valor);;
+            System.out.println(valor);
         }
     }
 

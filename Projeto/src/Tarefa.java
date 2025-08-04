@@ -6,6 +6,9 @@ public class Tarefa {
     private String titulo;
     private String descricao;
     private LocalDate deadline;
+    private LocalDate dataDeCadastro;
+
+
 
     public Tarefa(String titulo, String descricao, LocalDate deadline) {
         if (titulo.isEmpty() || descricao.isEmpty()){
@@ -14,6 +17,7 @@ public class Tarefa {
         this.titulo = titulo;
         this.descricao = descricao;
         this.deadline = deadline;
+        dataDeCadastro = LocalDate.from(LocalDateTime.now());
     }
 
     public boolean equals(Tarefa outro) {
@@ -21,7 +25,9 @@ public class Tarefa {
     }
 
     public String toString() {
-        return "Título da tarefa: " + titulo + ", Que dura até: " + deadline;
+        return "Título da tarefa: " + titulo +
+                ", Que dura até: " + deadline +
+                ", Data de Cadastro: " + dataDeCadastro;
     }
 
     public String getTitulo() {

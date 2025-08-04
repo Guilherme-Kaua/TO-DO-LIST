@@ -46,18 +46,16 @@ public class Main {
                         TratarErrosException.imprimirErroFormatado(e);
                     }
                     break;
-
                 case "2":
                     try{
                         if (persistencia.recuperarCentral().todasAsTarefas.isEmpty()){
                             throw new NullPointerException();
                         }
-                        persistencia.recuperarCentral().getTodasAsTarefas();
+                        persistencia.recuperarCentral().getTarefas();
 
                     } catch (Exception e) {
                         System.out.println("\nNão tem tarefas disponíveis para mostrar\n");;
                     }
-
                     break;
 
                 case "3":
