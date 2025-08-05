@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Tarefa {
     private final long id = System.currentTimeMillis();
@@ -7,6 +8,7 @@ public class Tarefa {
     private String descricao;
     private LocalDate deadline;
     private final LocalDate dataDeCadastro;
+    private List<SubTarefa> subTarefas;
 
 
 
@@ -19,6 +21,10 @@ public class Tarefa {
         this.deadline = deadline;
         dataDeCadastro = LocalDate.from(LocalDateTime.now());
     }
+
+    public void listarSubtarefas()
+
+
 
     public boolean equals(Tarefa outro) {
         return (outro.getId() == getId());

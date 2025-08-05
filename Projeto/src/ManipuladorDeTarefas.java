@@ -4,7 +4,8 @@ import java.util.List;
 
 public class ManipuladorDeTarefas {
 
-    private List<Tarefa> todasAsTarefas = new ArrayList<Tarefa>();
+    private List<Tarefa> todasAsTarefas = new ArrayList<>();
+
 
     public void adicionarTarefa(Tarefa obj){
         for(Tarefa valor: todasAsTarefas){
@@ -24,12 +25,13 @@ public class ManipuladorDeTarefas {
         return null;
     }
 
+    public
 
-    public void getTarefas() {
-        for (Tarefa valor: todasAsTarefas){
-            System.out.println(valor);
-        }
+
+    public void listarTarefas() {
+        todasAsTarefas.forEach(System.out::println);
     }
+
 
     public void excluirTarefa(Tarefa e){
 
