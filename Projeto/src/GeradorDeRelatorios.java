@@ -6,14 +6,15 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class GeradorDeRelatorios {
 
 
-    public static <LocalDate> void obterTarefasDeUmDia(LocalDate data, CentralDeInformacoes central) throws Exception {
+    public static <LocalDate> void obterTarefasDeUmDia(LocalDate data, ManipuladorDeTarefas tarefas) throws Exception {
 
         int contador = 0;
-        for (Tarefa tarefa: central.todasAsTarefas){
+        for (Tarefa tarefa: tarefas.getTodasAsTarefas()){
             if (tarefa.getDeadline().equals(data)){
                 contador++;
             }
@@ -23,13 +24,13 @@ public class GeradorDeRelatorios {
         }
 
         Document doc = new Document(PageSize.A4);
-        try {
+
             OutputStream os = new FileOutputStream("Relatorio.pdf");
 
             PdfWriter.getInstance(doc, os);
 
             doc.open();
-            for(Tarefa t: central.todasAsTarefas) {
+            for(Tarefa t: tarefas.getTodasAsTarefas()) {
                 if(t.getDeadline().equals(data)) {
                     Paragraph pg = new Paragraph(t.toString());
                     doc.add(pg);
@@ -37,9 +38,5 @@ public class GeradorDeRelatorios {
             }
             doc.close();
 
-        } catch (Exception e){
-            System.out.println("Um erro inesperado aconteceu");
-            e.printStackTrace();
-        }
     }
 }

@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
         Persistencia persistencia = new Persistencia();
-        CentralDeInformacoes central = persistencia.recuperarCentral();
+        ManipuladorDeTarefas central = persistencia.recuperarTarefas();
 
         loop:
         while (true) {
@@ -48,10 +48,10 @@ public class Main {
                     break;
                 case "2":
                     try{
-                        if (persistencia.recuperarCentral().todasAsTarefas.isEmpty()){
+                        if (){
                             throw new NullPointerException();
                         }
-                        persistencia.recuperarCentral().getTarefas();
+                        persistencia.recuperarTarefas().getTarefas();
 
                     } catch (Exception e) {
                         System.out.println("\nNão tem tarefas disponíveis para mostrar\n");;
@@ -77,7 +77,7 @@ public class Main {
                                 Integer.parseInt(espec[1]),
                                 Integer.parseInt(espec[0])
                         );
-                        GeradorDeRelatorios.obterTarefasDeUmDia(dataRelatorio, persistencia.recuperarCentral());
+                        GeradorDeRelatorios.obterTarefasDeUmDia(dataRelatorio, persistencia.recuperarTarefas());
                     } catch (Exception e) {
                         TratarErrosException.imprimirErroFormatado(e);
                     }
@@ -102,14 +102,14 @@ public class Main {
                         );
 
                         Mensageiro mensageiro = new Mensageiro();
-                        mensageiro.enviarEmailComPdf(email, data, persistencia.recuperarCentral());
+                        mensageiro.enviarEmailComPdf(email, data, persistencia.recuperarTarefas());
                     } catch (Exception e) {
                         TratarErrosException.imprimirErroFormatado(e);
                     }
                     break;
                 case "s":
                     input.close();
-                    persistencia.salvarCentral(central);
+                    persistencia.salvarTarefas(central);
                     System.out.println("Obrigado por usar. Saindo...");
                     break loop;
 

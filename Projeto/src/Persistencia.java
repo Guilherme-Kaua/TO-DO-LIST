@@ -7,20 +7,17 @@ import java.io.*;
 
 public class Persistencia {
 
-    public void XStream(XStream obj){
-        obj.addPermission(AnyTypePermission.ANY);
-        System.out.println("Deu certo");
-    }
     //cria o objeto xstream para converter outros objetos
     private final XStream xstream = new XStream(new DomDriver());
 
-    //cria o arquivo
-    private File arquivo = new File("central.xml");
 
-    public void salvarCentral(CentralDeInformacoes central) throws IOException {
+    //cria o arquivo
+    private File arquivo = new File("tarefa.xml");
+
+    public void salvarTarefas(ManipuladorDeTarefas tarefas) throws IOException {
 
         //convertendo objeto em uma String em formato xml
-        String xml = xstream.toXML(central);
+        String xml = xstream.toXML(tarefas);
 
         //se arquivo não existe, ele cria um
         if(!arquivo.exists()) arquivo.createNewFile();
@@ -32,16 +29,16 @@ public class Persistencia {
 
     }
 
-    public CentralDeInformacoes recuperarCentral() throws FileNotFoundException {
-        xstream.addPermission(AnyTypePermission.ANY);
+    public ManipuladorDeTarefas recuperarTarefas() throws FileNotFoundException {
+
         if(arquivo.exists()){
             //pega os bytes do arquivo e converte para um objeto do tipo estoque
             FileInputStream fis = new FileInputStream(arquivo);
             //cast para , converte o arquivo em formato xml para o tipo CentraDeInformaçoes
-            return (CentralDeInformacoes) xstream.fromXML(fis);
+            return (ManipuladorDeTarefas) xstream.fromXML(fis);
         }
         //se o arquivo nao existir retorna uma nova instancia de estoque
-        return new CentralDeInformacoes();
+        return new ManipuladorDeTarefas();
     }
 
 

@@ -18,7 +18,7 @@ import java.util.Properties;
 
 
 public class Mensageiro {
-    public void enviarEmailComPdf(String email, LocalDate data, CentralDeInformacoes central) throws Exception {
+    public void enviarEmailComPdf(String email, LocalDate data, ManipuladorDeTarefas tarefas) throws Exception {
         // Configuração do servidor SMTP
         String host = "smtp.gmail.com";
         final String username = "testedeemailspdfs@gmail.com";
@@ -49,7 +49,7 @@ public class Mensageiro {
 
         try {
             // 📝 Gera o PDF com base na data e tarefas
-            GeradorDeRelatorios.obterTarefasDeUmDia(data, central);
+            GeradorDeRelatorios.obterTarefasDeUmDia(data, tarefas);
 
             // Cria a mensagem
             Message message = new MimeMessage(session);
