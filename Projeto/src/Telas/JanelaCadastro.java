@@ -1,62 +1,118 @@
 package Telas;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class JanelaCadastro {
-    public static void main(String[] args) {
-        JFrame janelaCadastro = new JFrame("Lista de Tarefas");
+public class JanelaCadastro extends JFrame {
 
-        janelaCadastro.setSize(550, 400);
-        janelaCadastro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janelaCadastro.setLocationRelativeTo(null);
-        janelaCadastro.setResizable(false);
-        janelaCadastro.setLayout(null);
+    private JLabel labelTituloCadastrar;
+    private JSeparator linhaSeparador;
+    private JLabel labelNomeCadastro;
+    private JTextField jtNome;
+    private JLabel labelEmail;
+    private JTextField jtEmail;
+    private JButton botaoCadastrar;
 
-        JLabel labelTituloCadastrar = new JLabel("Cadastrar", SwingConstants.CENTER);
+    public JanelaCadastro() {
+        configurarJanela();
+        inicializarComponentes();
+        adicionarComponentes();
+        configurarEventos();
+    }
+
+    private void configurarJanela() {
+        setTitle("Lista de Tarefas");
+        setSize(550, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setLayout(null);
+    }
+
+    private void inicializarComponentes() {
+
+        labelTituloCadastrar = new JLabel("Cadastrar", SwingConstants.CENTER);
         labelTituloCadastrar.setFont(new Font("Rockwell", Font.PLAIN, 44));
         labelTituloCadastrar.setBounds(150, 30, 250, 60);
-        janelaCadastro.add(labelTituloCadastrar);
 
-        JSeparator linhaSeparador = new JSeparator();
 
-        linhaSeparador.setBounds(0, 90, 550, 10); // Posicionado abaixo do título
+        linhaSeparador = new JSeparator();
+        linhaSeparador.setBounds(0, 90, 550, 10);
         linhaSeparador.setForeground(Color.BLACK);
-        janelaCadastro.add(linhaSeparador);
 
 
-        JLabel labelNomeCadastro = new JLabel("Nome:");
+        labelNomeCadastro = new JLabel("Nome:");
         labelNomeCadastro.setFont(new Font("tahoma", Font.PLAIN, 22));
         labelNomeCadastro.setBounds(100, 120, 100, 30);
-        janelaCadastro.add(labelNomeCadastro);
 
-        JTextField jtNome = new JTextField();
+        jtNome = new JTextField();
         jtNome.setBounds(200, 120, 250, 30);
-        janelaCadastro.add(jtNome);
-        //
-        JLabel labelEmail = new JLabel("Email:");
+
+
+        labelEmail = new JLabel("Email:");
         labelEmail.setFont(new Font("tahoma", Font.PLAIN, 22));
         labelEmail.setBounds(100, 170, 100, 30);
-        janelaCadastro.add(labelEmail);
 
-        JTextField jtEmail = new JTextField();
+        jtEmail = new JTextField();
         jtEmail.setBounds(200, 170, 250, 30);
-        janelaCadastro.add(jtEmail);
 
-        JButton botaoCadastrar = new JButton("Cadastrar");
+
+        botaoCadastrar = new JButton("Cadastrar");
         botaoCadastrar.setBounds(230, 246, 130, 30);
-        janelaCadastro.add(botaoCadastrar);
+    }
 
+    private void adicionarComponentes() {
+        add(labelTituloCadastrar);
+        add(linhaSeparador);
+        add(labelNomeCadastro);
+        add(jtNome);
+        add(labelEmail);
+        add(jtEmail);
+        add(botaoCadastrar);
+    }
 
+    private void configurarEventos() {
+       //apertar enter muda o campo
         jtNome.addActionListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
                 jtEmail.requestFocus();
             }
         });
 
-        janelaCadastro.setVisible(true);
+
+        botaoCadastrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Lógica para cadastrar o usuário
+                String nome = jtNome.getText();
+                String email = jtEmail.getText();
+
+
+                if(nome.isEmpty() || email.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+                    // Aqui você poderia chamar um método para salvar os dados
+                }
+            }
+        });
+    }
+
+
+    public String getNome() {
+        return jtNome.getText();
+    }
+
+    public String getEmail() {
+        return jtEmail.getText();
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new JanelaCadastro().setVisible(true);
+            }
+        });
     }
 }
-

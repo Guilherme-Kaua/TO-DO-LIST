@@ -3,75 +3,147 @@ package Telas;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class JanelaEventos {
+public class JanelaEventos extends JFrame {
+    // Componentes principais
+    private JTabbedPane abas;
+    private JPanel painelTodas;
+    private JPanel painelMes;
+    private JPanel painelDia;
+    private JPanel painelSair;
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Sistema de Eventos");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
-        frame.setLocationRelativeTo(null);
+    // Componentes do painel "Todas"
+    private JButton botaoAdicionar;
+    private JTextArea inputTitulo;
+    private JTextArea inputDesc;
+    private JTextArea inputData;
+    private JButton botaoEditar;
+    private JButton botaoExcluir;
+    private JButton botaoSair;
 
+    public JanelaEventos() {
+        configurarJanela();
+        inicializarComponentes();
+        configurarLayout();
+        configurarEventos();
+    }
 
-        JTabbedPane abas = new JTabbedPane();
+    private void configurarJanela() {
+        setTitle("Sistema de Eventos");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500, 400);
+        setLocationRelativeTo(null);
+    }
 
+    private void inicializarComponentes() {
+        abas = new JTabbedPane();
 
-        JPanel painelTodas = criarPainelTodas();
-        JPanel painelMes = new JPanel();
-        JPanel painelDia = new JPanel();
-        JPanel painelSair = new JPanel();
-        JButton botaoSair = new JButton("Sair");
+        // Painel "Todas"
+        botaoAdicionar = new JButton("+ Adicionar Evento");
+        inputTitulo = new JTextArea();
+        inputDesc = new JTextArea();
+        inputData = new JTextArea();
+        botaoEditar = new JButton("Editar Evento");
+        botaoExcluir = new JButton("Excluir Evento");
 
+        // Painel "Sair"
+        botaoSair = new JButton("Sair");
+    }
+
+    private void configurarLayout() {
+        // Configuração do painel "Todas"
+        painelTodas = new JPanel(new BorderLayout());
+
+        JPanel painelEvento = new JPanel(new GridLayout(5, 2, 10, 10));
+        Border borda = BorderFactory.createLineBorder(Color.BLACK);
+
+        inputTitulo.setBorder(borda);
+        inputDesc.setBorder(borda);
+        inputData.setBorder(borda);
+
+        painelEvento.add(new JLabel("Titulo:"));
+        painelEvento.add(inputTitulo);
+        painelEvento.add(new JLabel("Descrição:"));
+        painelEvento.add(inputDesc);
+        painelEvento.add(new JLabel("Data do evento:"));
+        painelEvento.add(inputData);
+
+        JPanel botoes = new JPanel();
+        botoes.add(botaoEditar);
+        botoes.add(botaoExcluir);
+
+        painelTodas.add(botaoAdicionar, BorderLayout.NORTH);
+        painelTodas.add(painelEvento, BorderLayout.CENTER);
+        painelTodas.add(botoes, BorderLayout.SOUTH);
+
+        // Painéis vazios (podem ser implementados depois)
+        painelMes = new JPanel();
+        painelDia = new JPanel();
+
+        // Painel "Sair"
+        painelSair = new JPanel();
         painelSair.add(botaoSair);
+
+        // Adicionando abas
         abas.addTab("Todas", painelTodas);
         abas.addTab("Listar por mês", painelMes);
         abas.addTab("Listar por dia", painelDia);
         abas.addTab("Sair", painelSair);
 
-
-        frame.add(abas);
-        frame.setVisible(true);
+        add(abas);
     }
 
-    private static JPanel criarPainelTodas() {
-        JPanel painel = new JPanel();
-        painel.setLayout(new BorderLayout());
+    private void configurarEventos() {
+        botaoSair.addActionListener(e -> System.exit(0));
 
+        botaoAdicionar.addActionListener(e -> {
+            // Lógica para adicionar novo evento
+            String titulo = inputTitulo.getText();
+            String descricao = inputDesc.getText();
+            String data = inputData.getText();
 
-        JButton botaoAdicionar = new JButton("+ Adicionar Evento");
-        painel.add(botaoAdicionar, BorderLayout.NORTH);
+            if (titulo.isEmpty() || data.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha pelo menos título e data!");
+            } else {
+                // Aqui você adicionaria o evento à lista
+                JOptionPane.showMessageDialog(this, "Evento adicionado com sucesso!");
+                limparCampos();
+            }
+        });
 
+        botaoEditar.addActionListener(e -> {
+            // Lógica para editar evento
+            JOptionPane.showMessageDialog(this, "Funcionalidade de edição em desenvolvimento");
+        });
 
-        JPanel painelEvento = new JPanel();
-        painelEvento.setLayout(new GridLayout(5, 2, 10, 10));
+        botaoExcluir.addActionListener(e -> {
+            // Lógica para excluir evento
+            JOptionPane.showMessageDialog(this, "Funcionalidade de exclusão em desenvolvimento");
+        });
+    }
 
-        Border borda = BorderFactory.createLineBorder(Color.BLACK);
+    private void limparCampos() {
+        inputTitulo.setText("");
+        inputDesc.setText("");
+        inputData.setText("");
+    }
 
-        JLabel tituloLabel = new JLabel("Titulo:");
-        painelEvento.add(tituloLabel);
-        JTextArea inputTitulo = new JTextArea();
-        inputTitulo.setBorder(borda);
-        painelEvento.add(inputTitulo);
+    // Getters para os campos (opcional)
+    public String getTituloEvento() {
+        return inputTitulo.getText();
+    }
 
-        painelEvento.add(new JLabel("Descrição:"));
-        JTextArea inputDesc = new JTextArea();
-        inputDesc.setBorder(borda);
-        painelEvento.add(inputDesc);
+    public String getDescricaoEvento() {
+        return inputDesc.getText();
+    }
 
-        painelEvento.add(new JLabel("Data do evento:"));
-        JTextArea inputData = new JTextArea();
-        inputData.setBorder(borda);
-        painelEvento.add(inputData);
+    public String getDataEvento() {
+        return inputData.getText();
+    }
 
-
-        JPanel botoes = new JPanel();
-        botoes.add(new JButton("Editar Evento"));
-        botoes.add(new JButton("Excluir Evento"));
-
-        // Adiciona ao painel principal
-        painel.add(painelEvento, BorderLayout.CENTER);
-        painel.add(botoes, BorderLayout.SOUTH);
-
-        return painel;
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new JanelaEventos().setVisible(true));
     }
 }

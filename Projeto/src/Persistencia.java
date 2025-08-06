@@ -35,14 +35,15 @@ public class Persistencia {
     public CentralDeInformacoes recuperarCentral() throws FileNotFoundException {
         xstream.addPermission(AnyTypePermission.ANY);
         if(arquivo.exists()){
-            //pega os bytes do arquivo e converte para um objeto do tipo estoque
+
             FileInputStream fis = new FileInputStream(arquivo);
-            //cast para , converte o arquivo em formato xml para o tipo CentraDeInformaçoes
+
             return (CentralDeInformacoes) xstream.fromXML(fis);
         }
         //se o arquivo nao existir retorna uma nova instancia de estoque
         return new CentralDeInformacoes();
     }
+
 
 
 }
