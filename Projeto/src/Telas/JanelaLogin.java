@@ -96,9 +96,9 @@ public class JanelaLogin extends JFrame {
                 } else {
                   //Login
                     JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
-                    // Exemplo: abrir a janela principal do sistema
-                    // new JanelaPrincipal().setVisible(true);
-                    // dispose(); // Fecha a janela de login
+                    dispose();
+                    new Menu().setVisible(true);
+
                 }
             }
         });

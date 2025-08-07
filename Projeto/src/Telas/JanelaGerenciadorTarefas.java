@@ -18,6 +18,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
     private JTextArea areaDescricao;
     private JTextField campoData;
     private JComboBox<String> comboNivel;
+    private  JButton botaoVoltar;
 
     public JanelaGerenciadorTarefas() {
         configurarJanela();
@@ -31,6 +32,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 500);
         setLocationRelativeTo(null);
+        setResizable(false);
         setLayout(new BorderLayout());
     }
 
@@ -125,8 +127,11 @@ public class JanelaGerenciadorTarefas extends JFrame {
         JPanel painelBotoes = new JPanel();
         JButton btnCadastrar = new JButton("Cadastrar");
         JButton btnLimpar = new JButton("Limpar");
+        JButton btnVoltar= new JButton("Voltar");
         painelBotoes.add(btnCadastrar);
         painelBotoes.add(btnLimpar);
+        painelBotoes.add(btnVoltar);
+
 
 
         formulario.add(painelNome);
@@ -191,6 +196,11 @@ public class JanelaGerenciadorTarefas extends JFrame {
         painelBotoes.add(btnCarregar);
         painelBotoes.add(btnSalvar);
 
+        botaoVoltar= new JButton("Voltar");
+        botaoVoltar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        botaoVoltar.setFocusPainted(false);
+        painelBotoes.add(botaoVoltar);
+
         painelPrincipal.add(painelSelecao);
         painel.add(painelPrincipal, BorderLayout.CENTER);
         painel.add(painelBotoes, BorderLayout.SOUTH);
@@ -235,6 +245,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
         JPanel painelCadastrar = (JPanel) abas.getComponentAt(0);
         JButton btnCadastrar = (JButton) ((JPanel)painelCadastrar.getComponent(2)).getComponent(0);
         JButton btnLimpar = (JButton) ((JPanel)painelCadastrar.getComponent(2)).getComponent(1);
+        JButton btnVoltar= (JButton) ((JPanel)painelCadastrar.getComponent(2)).getComponent(2);
 
         JPanel painelListar = (JPanel) abas.getComponentAt(1);
         JButton btnAtualizar = (JButton) painelListar.getComponent(2);
@@ -280,7 +291,13 @@ public class JanelaGerenciadorTarefas extends JFrame {
             campoData.setText("");
             comboNivel.setSelectedIndex(0);
         });
-
+        btnVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new Menu().setVisible(true);
+            }
+        });
         btnAtualizar.addActionListener(e -> {
             JOptionPane.showMessageDialog(this,
                     "Lista de tarefas atualizada!",

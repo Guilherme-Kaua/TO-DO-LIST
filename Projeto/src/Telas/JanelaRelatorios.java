@@ -13,7 +13,7 @@ public class JanelaRelatorios extends JFrame {
     private JButton botaoEmail;
     private JButton botaoPlanilha;
     private JPanel painelBotoes;
-
+    private JButton botaoVoltar;
     public JanelaRelatorios() {
         configurarJanela();
         inicializarComponentes();
@@ -48,6 +48,9 @@ public class JanelaRelatorios extends JFrame {
         botaoPlanilha.setFont(new Font("Tahoma", Font.PLAIN, 20));
         botaoPlanilha.setFocusPainted(false);
 
+        botaoVoltar= new JButton("Voltar");
+        botaoVoltar.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        botaoVoltar.setFocusPainted(false);
 
         painelBotoes = new JPanel();
     }
@@ -61,17 +64,19 @@ public class JanelaRelatorios extends JFrame {
         botaoPdf.setAlignmentX(Component.CENTER_ALIGNMENT);
         botaoPlanilha.setAlignmentX(Component.CENTER_ALIGNMENT);
         botaoEmail.setAlignmentX(Component.CENTER_ALIGNMENT);
-
+        botaoVoltar.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         painelBotoes.add(botaoPdf);
         painelBotoes.add(Box.createVerticalStrut(20));
         painelBotoes.add(botaoPlanilha);
         painelBotoes.add(Box.createVerticalStrut(20));
         painelBotoes.add(botaoEmail);
-
+        painelBotoes.add(Box.createVerticalStrut(20));
+        painelBotoes.add(botaoVoltar);
 
         add(labelTitulo, BorderLayout.NORTH);
         add(painelBotoes, BorderLayout.CENTER);
+
     }
 
     private void configurarEventos() {
@@ -96,6 +101,13 @@ public class JanelaRelatorios extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Preparando envio por e-mail...");
                 // Aqui você implementaria a lógica de envio por e-mail
+            }
+        });
+        botaoVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new Menu().setVisible(true);
             }
         });
     }

@@ -95,6 +95,8 @@ public class JanelaCadastro extends JFrame {
                     JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
                     // Aqui você poderia chamar um método para salvar os dados
                 }
+                dispose();
+                new JanelaLogin().setVisible(true);
             }
         });
     }

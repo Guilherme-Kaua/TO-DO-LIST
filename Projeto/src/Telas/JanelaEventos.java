@@ -11,6 +11,7 @@ public class JanelaEventos extends JFrame {
     private JPanel painelMes;
     private JPanel painelDia;
     private JPanel painelSair;
+    private JButton botaoVoltar;
 
     // Componentes do painel "Todas"
     private JButton botaoAdicionar;
@@ -45,6 +46,7 @@ public class JanelaEventos extends JFrame {
         inputData = new JTextArea();
         botaoEditar = new JButton("Editar Evento");
         botaoExcluir = new JButton("Excluir Evento");
+        botaoVoltar= new JButton("Voltar");
 
         // Painel "Sair"
         botaoSair = new JButton("Sair");
@@ -71,6 +73,7 @@ public class JanelaEventos extends JFrame {
         JPanel botoes = new JPanel();
         botoes.add(botaoEditar);
         botoes.add(botaoExcluir);
+        botoes.add(botaoVoltar);
 
         painelTodas.add(botaoAdicionar, BorderLayout.NORTH);
         painelTodas.add(painelEvento, BorderLayout.CENTER);
@@ -119,6 +122,10 @@ public class JanelaEventos extends JFrame {
         botaoExcluir.addActionListener(e -> {
             // Lógica para excluir evento
             JOptionPane.showMessageDialog(this, "Funcionalidade de exclusão em desenvolvimento");
+        });
+        botaoVoltar.addActionListener(e-> {
+            dispose();
+            new Menu().setVisible(true);
         });
     }
 
