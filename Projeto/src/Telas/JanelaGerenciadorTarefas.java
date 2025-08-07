@@ -39,7 +39,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
 
         // Modelo da tabela para listagem
         tableModel = new DefaultTableModel();
-        tableModel.addColumn("Nome");
+        tableModel.addColumn("Título");
         tableModel.addColumn("Descrição");
         tableModel.addColumn("Data");
         tableModel.addColumn("Nível");
@@ -84,7 +84,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
 
 
         JPanel painelNome = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel labelNome = new JLabel("Nome:");
+        JLabel labelNome = new JLabel("Título:");
         labelNome.setFont(new Font("Tahoma", Font.PLAIN, 16));
         campoNome = new JTextField(20);
         campoNome.setPreferredSize(new Dimension(200, 30));

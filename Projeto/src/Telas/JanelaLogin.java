@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class JanelaLogin extends JFrame {
-    // Componentes da interface
+
     private JLabel labelloginTitulo;
     private JSeparator separador;
     private JLabel labelNomeUsuario;
@@ -33,17 +33,17 @@ public class JanelaLogin extends JFrame {
     }
 
     private void inicializarComponentes() {
-        // Título
+
         labelloginTitulo = new JLabel("Login", SwingConstants.CENTER);
         labelloginTitulo.setFont(new Font("Rockwell", Font.PLAIN, 44));
         labelloginTitulo.setBounds(150, 30, 250, 60);
 
-        // Linha separadora
+
         separador = new JSeparator();
         separador.setBounds(0, 90, 550, 10);
         separador.setForeground(Color.BLACK);
 
-        // Campo Nome
+
         labelNomeUsuario = new JLabel("Nome:");
         labelNomeUsuario.setFont(new Font("tahoma", Font.PLAIN, 22));
         labelNomeUsuario.setBounds(100, 120, 100, 30);
@@ -51,7 +51,7 @@ public class JanelaLogin extends JFrame {
         jtNome = new JTextField();
         jtNome.setBounds(200, 120, 250, 30);
 
-        // Campo Email
+
         labelEmail = new JLabel("Email:");
         labelEmail.setFont(new Font("tahoma", Font.PLAIN, 22));
         labelEmail.setBounds(100, 170, 100, 30);
@@ -59,7 +59,7 @@ public class JanelaLogin extends JFrame {
         jtEmail = new JTextField();
         jtEmail.setBounds(200, 170, 250, 30);
 
-        // Botões
+
         botaoLogin = new JButton("Login");
         botaoLogin.setBounds(150, 246, 130, 30);
 
@@ -79,14 +79,13 @@ public class JanelaLogin extends JFrame {
     }
 
     private void configurarEventos() {
-        // Evento para mudar de campo ao pressionar Enter
+
         jtNome.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 jtEmail.requestFocus();
             }
         });
 
-        // Evento do botão Login
         botaoLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String nome = jtNome.getText();
@@ -95,7 +94,7 @@ public class JanelaLogin extends JFrame {
                 if(nome.isEmpty() || email.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
                 } else {
-                    // Aqui você implementaria a lógica de login
+                  //Login
                     JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
                     // Exemplo: abrir a janela principal do sistema
                     // new JanelaPrincipal().setVisible(true);
@@ -104,10 +103,10 @@ public class JanelaLogin extends JFrame {
             }
         });
 
-        // Evento do botão Cadastrar
+
         botaoCadastrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Aqui você poderia abrir uma janela de cadastro
+
                 JOptionPane.showMessageDialog(null, "Redirecionando para cadastro...");
                 dispose();
                 new JanelaCadastro().setVisible(true);
@@ -115,7 +114,6 @@ public class JanelaLogin extends JFrame {
         });
     }
 
-    // Getters para os campos (opcional)
     public String getNome() {
         return jtNome.getText();
     }
