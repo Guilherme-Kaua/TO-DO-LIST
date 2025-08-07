@@ -84,7 +84,7 @@ public class JanelaRelatorios extends JFrame {
         botaoPdf.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Exportando para PDF...");
-                // Aqui você implementaria a lógica de exportação para PDF
+
             }
         });
 

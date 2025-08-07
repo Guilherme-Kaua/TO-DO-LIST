@@ -5,6 +5,12 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import CRUD.*;
+import Importantes.Persistencia;
+import Principais.Tarefa;
 
 public class JanelaGerenciadorTarefas extends JFrame {
     private JTabbedPane abas;
@@ -18,7 +24,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
     private JTextArea areaDescricao;
     private JTextField campoData;
     private JComboBox<String> comboNivel;
-    private  JButton botaoVoltar;
+    private JButton botaoVoltar;
 
     public JanelaGerenciadorTarefas() {
         configurarJanela();
@@ -127,11 +133,10 @@ public class JanelaGerenciadorTarefas extends JFrame {
         JPanel painelBotoes = new JPanel();
         JButton btnCadastrar = new JButton("Cadastrar");
         JButton btnLimpar = new JButton("Limpar");
-        JButton btnVoltar= new JButton("Voltar");
+        JButton btnVoltar = new JButton("Voltar");
         painelBotoes.add(btnCadastrar);
         painelBotoes.add(btnLimpar);
         painelBotoes.add(btnVoltar);
-
 
 
         formulario.add(painelNome);
@@ -171,7 +176,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
         JPanel painel = new JPanel(new BorderLayout());
 
 
-        JLabel labelTitulo = new JLabel("Editar Principais.Tarefa", SwingConstants.CENTER);
+        JLabel labelTitulo = new JLabel("Editar Tarefa", SwingConstants.CENTER);
         labelTitulo.setFont(new Font("Rockwell", Font.PLAIN, 30));
         painel.add(labelTitulo, BorderLayout.NORTH);
 
@@ -196,10 +201,6 @@ public class JanelaGerenciadorTarefas extends JFrame {
         painelBotoes.add(btnCarregar);
         painelBotoes.add(btnSalvar);
 
-        botaoVoltar= new JButton("Voltar");
-        botaoVoltar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        botaoVoltar.setFocusPainted(false);
-        painelBotoes.add(botaoVoltar);
 
         painelPrincipal.add(painelSelecao);
         painel.add(painelPrincipal, BorderLayout.CENTER);
@@ -212,7 +213,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
         JPanel painel = new JPanel(new BorderLayout());
 
 
-        JLabel labelTitulo = new JLabel("Excluir Principais.Tarefa", SwingConstants.CENTER);
+        JLabel labelTitulo = new JLabel("Excluir Tarefa", SwingConstants.CENTER);
         labelTitulo.setFont(new Font("Rockwell", Font.PLAIN, 30));
         painel.add(labelTitulo, BorderLayout.NORTH);
 
@@ -231,7 +232,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
         painelSelecao.add(comboExcluir);
 
 
-        JButton btnExcluir = new JButton("Excluir Principais.Tarefa");
+        JButton btnExcluir = new JButton("Excluir Tarefa");
 
         painelPrincipal.add(painelSelecao);
         painel.add(painelPrincipal, BorderLayout.CENTER);
@@ -243,16 +244,16 @@ public class JanelaGerenciadorTarefas extends JFrame {
     private void configurarEventos() {
 
         JPanel painelCadastrar = (JPanel) abas.getComponentAt(0);
-        JButton btnCadastrar = (JButton) ((JPanel)painelCadastrar.getComponent(2)).getComponent(0);
-        JButton btnLimpar = (JButton) ((JPanel)painelCadastrar.getComponent(2)).getComponent(1);
-        JButton btnVoltar= (JButton) ((JPanel)painelCadastrar.getComponent(2)).getComponent(2);
+        JButton btnCadastrar = (JButton) ((JPanel) painelCadastrar.getComponent(2)).getComponent(0);
+        JButton btnLimpar = (JButton) ((JPanel) painelCadastrar.getComponent(2)).getComponent(1);
+        JButton btnVoltar = (JButton) ((JPanel) painelCadastrar.getComponent(2)).getComponent(2);
 
         JPanel painelListar = (JPanel) abas.getComponentAt(1);
         JButton btnAtualizar = (JButton) painelListar.getComponent(2);
 
         JPanel painelEditar = (JPanel) abas.getComponentAt(2);
-        JButton btnCarregar = (JButton) ((JPanel)painelEditar.getComponent(2)).getComponent(0);
-        JButton btnSalvar = (JButton) ((JPanel)painelEditar.getComponent(2)).getComponent(1);
+        JButton btnCarregar = (JButton) ((JPanel) painelEditar.getComponent(2)).getComponent(0);
+        JButton btnSalvar = (JButton) ((JPanel) painelEditar.getComponent(2)).getComponent(1);
 
         JPanel painelExcluir = (JPanel) abas.getComponentAt(3);
         JButton btnExcluir = (JButton) painelExcluir.getComponent(2);
@@ -267,6 +268,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
                 return;
             }
 
+
             tableModel.addRow(new Object[]{
                     campoNome.getText(),
                     areaDescricao.getText(),
@@ -275,7 +277,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
             });
 
             JOptionPane.showMessageDialog(this,
-                    "Principais.Tarefa cadastrada com sucesso!",
+                    "Tarefa cadastrada com sucesso!",
                     "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
 
@@ -345,7 +347,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
             if (confirmacao == JOptionPane.YES_OPTION) {
                 tableModel.removeRow(tabelaTarefas.getSelectedRow());
                 JOptionPane.showMessageDialog(this,
-                        "Principais.Tarefa excluída com sucesso!",
+                        "Tarefa excluída com sucesso!",
                         "Sucesso",
                         JOptionPane.INFORMATION_MESSAGE);
             }
@@ -357,5 +359,89 @@ public class JanelaGerenciadorTarefas extends JFrame {
             JanelaGerenciadorTarefas janela = new JanelaGerenciadorTarefas();
             janela.setVisible(true);
         });
+    }
+
+    public JTabbedPane getAbas() {
+        return abas;
+    }
+
+    public JTextField getCampoNome() {
+        return campoNome;
+    }
+
+    public JTextField getCampoData() {
+        return campoData;
+    }
+
+    public JComboBox<String> getComboNivel() {
+        return comboNivel;
+    }
+
+    public JTable getTabelaTarefas() {
+        return tabelaTarefas;
+    }
+
+
+    public class OuvinteCadastrarTarefa implements ActionListener {
+        private JanelaGerenciadorTarefas janela;
+        private ManipuladorDeTarefas central;
+        private Persistencia persistencia;
+
+        public JanelaGerenciadorTarefas getJanela() {
+            return janela;
+        }
+
+        public ManipuladorDeTarefas getCentral() {
+            return central;
+        }
+
+        public Persistencia getPersistencia() {
+            return persistencia;
+        }
+
+        public OuvinteCadastrarTarefa(JanelaGerenciadorTarefas janela, ManipuladorDeTarefas central, Persistencia persistencia) {
+            this.janela = janela;
+            this.central = central;
+            this.persistencia = new Persistencia();
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            try {
+                // Obter os dados da janela
+                String titulo = janela.getCampoNome().getText();
+                String dataTexto = janela.getCampoData().getText();
+                // int nivelPrioridade = janela.getComboNivel().getSelectedIndex() + 1; // +1 porque começa em 0
+
+                // Validar campos
+                if (titulo.isEmpty() || dataTexto.isEmpty()) {
+                    JOptionPane.showMessageDialog(janela, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Converter a data
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate deadline = LocalDate.parse(dataTexto, formatter);
+
+                // Criar a tarefa (usando título como descrição também, ou pode adicionar outro campo)
+                Tarefa tarefa = new Tarefa(titulo, titulo, deadline);
+
+                // Adicionar à central (assumindo que central.adicionarTarefa() existe)
+                central.adicionarTarefa(tarefa);
+                persistencia.salvarCentral(central);
+                ManipuladorDeTarefas central = persistencia.recuperarTarefas();
+
+                // Feedback ao usuário
+                JOptionPane.showMessageDialog(janela, "Tarefa cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+
+                // Limpar campos
+                janela.getCampoNome().setText("");
+                janela.getCampoData().setText("");
+                janela.getComboNivel().setSelectedIndex(0);
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(janela, "Erro ao cadastrar tarefa: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 }

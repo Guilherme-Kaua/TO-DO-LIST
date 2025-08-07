@@ -44,8 +44,8 @@ public class JanelaEventos extends JFrame {
         inputTitulo = new JTextArea();
         inputDesc = new JTextArea();
         inputData = new JTextArea();
-        botaoEditar = new JButton("Editar Principais.Evento");
-        botaoExcluir = new JButton("Excluir Principais.Evento");
+        botaoEditar = new JButton("Editar Evento");
+        botaoExcluir = new JButton("Excluir Evento");
         botaoVoltar= new JButton("Voltar");
 
         // Painel "Sair"
