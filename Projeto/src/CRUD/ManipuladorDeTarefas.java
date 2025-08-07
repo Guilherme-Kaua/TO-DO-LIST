@@ -1,12 +1,23 @@
 package CRUD;
 import Principais.*;
-
+import Importantes.*;
 import javax.sound.midi.SoundbankResource;
+import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManipuladorDeTarefas {
 
+
+    public ManipuladorDeTarefas() throws FileNotFoundException {
+            Persistencia persistencia = new Persistencia();
+            if (persistencia.recuperarTarefas().getTarefas().isEmpty()){
+                persistencia.recuperarTarefas().setTarefas(null);
+            }
+            this.todasAsTarefas = persistencia.recuperarTarefas().getTarefas();
+        }
         private List<Tarefa> todasAsTarefas = new ArrayList<>();
 
 
@@ -18,7 +29,6 @@ public class ManipuladorDeTarefas {
             }
             todasAsTarefas.add(obj);
         }
-
 
         public Tarefa recuperarTarefaPorId(long id) {
             for(Tarefa t: todasAsTarefas) {
@@ -33,15 +43,21 @@ public class ManipuladorDeTarefas {
             todasAsTarefas.forEach(System.out::println);
         }
 
+        public void editarTarefa(Tarefa tarefa, String t, String d, LocalDate data, int prio){
+            tarefa.setTitulo(t);
+            tarefa.setDescricao(d);
+            tarefa.setDeadline(data);
+            tarefa.setNivel(prio);
+        }
 
-        //public void excluirTarefa(Tarefa e){
-           // for (Tarefa tarefa: todasAsTarefas){
 
-        //}
+        public void excluirTarefa(Tarefa tarefa){
+            todasAsTarefas.remove(tarefa);
+        }
 
-    public List<Tarefa> getTarefas() {
-        return todasAsTarefas;
-    }
+        public List<Tarefa> getTarefas() {
+            return todasAsTarefas;
+        }
 
     public void setTarefas(List<Tarefa> todasAsTarefas) {
         this.todasAsTarefas = todasAsTarefas;

@@ -27,7 +27,7 @@ public class Main {
                     3 - exibir informações de uma tarefa específica 
                     4 - gerar relatório de tarefas de um dia específico 
                     5 - enviar email com PDF
-                    s - sair"
+                    s - sair
                            \s"""
 
             );
@@ -126,7 +126,6 @@ public class Main {
                     persistencia.salvarTarefas(central);
                     System.out.println("Obrigado por usar. Saindo...");
                     break loop;
-
                 default:
                     System.out.println("Opção inválida.\n");
                     break;
