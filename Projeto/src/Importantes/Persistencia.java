@@ -1,5 +1,7 @@
 package Importantes;
 
+import CRUD.ManipuladorDeEventos;
+import CRUD.ManipuladorDeTarefas;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.security.AnyTypePermission;
@@ -9,41 +11,66 @@ import java.io.*;
 
 public class Persistencia {
 
-    public void XStream(XStream obj){
-        obj.addPermission(AnyTypePermission.ANY);
-        System.out.println("Deu certo");
-    }
     //cria o objeto xstream para converter outros objetos
     private final XStream xstream = new XStream(new DomDriver());
 
     //cria o arquivo
-    private File arquivo = new File("central.xml");
+    private final File arquivoTarefas = new File("tarefas.xml");
+    private final File arquivoEventos = new File("eventos.xml");
 
-    public void salvarCentral(CentralDeInformacoes central) throws IOException {
+
+    public void salvarCentral(ManipuladorDeTarefas tarefas) throws IOException {
 
         //convertendo objeto em uma String em formato xml
-        String xml = xstream.toXML(central);
+        String xml = xstream.toXML(tarefas);
 
         //se arquivo não existe, ele cria um
-        if(!arquivo.exists()) arquivo.createNewFile();
+        if(!arquivoTarefas.exists()) arquivoTarefas.createNewFile();
 
         //gravar as informaçoes no arquivo
-        PrintWriter gravar = new PrintWriter(arquivo);
+        PrintWriter gravar = new PrintWriter(arquivoTarefas);
         gravar.print(xml);
         gravar.close();
 
     }
 
-    public CentralDeInformacoes recuperarCentral() throws FileNotFoundException {
+    public ManipuladorDeEventos recuperarEventos() throws FileNotFoundException {
         xstream.addPermission(AnyTypePermission.ANY);
-        if(arquivo.exists()){
+        if(arquivoTarefas.exists()){
 
-            FileInputStream fis = new FileInputStream(arquivo);
+            FileInputStream fis = new FileInputStream(arquivoTarefas);
 
-            return (CentralDeInformacoes) xstream.fromXML(fis);
+            return (ManipuladorDeEventos) xstream.fromXML(fis);
         }
         //se o arquivo nao existir retorna uma nova instancia de estoque
-        return new CentralDeInformacoes();
+        return new ManipuladorDeEventos();
+    }
+
+    public void salvarEventos(ManipuladorDeEventos eventos) throws IOException {
+
+        //convertendo objeto em uma String em formato xml
+        String xml = xstream.toXML(eventos);
+
+        //se arquivo não existe, ele cria um
+        if(!arquivoEventos.exists()) arquivoTarefas.createNewFile();
+
+        //gravar as informaçoes no arquivo
+        PrintWriter gravar = new PrintWriter(arquivoEventos);
+        gravar.print(xml);
+        gravar.close();
+
+    }
+
+    public ManipuladorDeTarefas recuperarTarefas() throws FileNotFoundException {
+        xstream.addPermission(AnyTypePermission.ANY);
+        if(arquivoTarefas.exists()){
+
+            FileInputStream fis = new FileInputStream(arquivoTarefas);
+
+            return (ManipuladorDeTarefas) xstream.fromXML(fis);
+        }
+        //se o arquivo nao existir retorna uma nova instancia de estoque
+        return new ManipuladorDeTarefas();
     }
 
 

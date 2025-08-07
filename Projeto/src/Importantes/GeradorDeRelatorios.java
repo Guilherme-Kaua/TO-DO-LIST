@@ -1,5 +1,6 @@
 package Importantes;
 
+import CRUD.ManipuladorDeTarefas;
 import Principais.Tarefa;
 import com.itextpdf.text.Document;
 
@@ -12,10 +13,10 @@ import java.io.OutputStream;
 public class GeradorDeRelatorios {
 
 
-    public static <LocalDate> void obterTarefasDeUmDia(LocalDate data, CentralDeInformacoes central) throws Exception {
+    public static <LocalDate> void obterTarefasDeUmDia(LocalDate data, ManipuladorDeTarefas tarefas) throws Exception {
 
         int contador = 0;
-        for (Tarefa tarefa: central.todasAsTarefas){
+        for (Tarefa tarefa: tarefas.getTarefas()){
             if (tarefa.getDeadline().equals(data)){
                 contador++;
             }
@@ -31,7 +32,7 @@ public class GeradorDeRelatorios {
             PdfWriter.getInstance(doc, os);
 
             doc.open();
-            for(Tarefa t: central.todasAsTarefas) {
+            for(Tarefa t: tarefas.getTarefas()) {
                 if(t.getDeadline().equals(data)) {
                     Paragraph pg = new Paragraph(t.toString());
                     doc.add(pg);

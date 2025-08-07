@@ -1,5 +1,7 @@
 package CRUD;
 import Principais.*;
+
+import javax.sound.midi.SoundbankResource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +28,8 @@ public class ManipuladorDeTarefas {
             return null;
         }
 
-        public List<Tarefa> listarTarefas() {
-            return todasAsTarefas;
+        public void listarTarefas() {
+            todasAsTarefas.forEach(System.out::println);
         }
 
 
@@ -36,5 +38,11 @@ public class ManipuladorDeTarefas {
 
         //}
 
+    public List<Tarefa> getTarefas() {
+        return todasAsTarefas;
+    }
+
+    public void setTarefas(List<Tarefa> todasAsTarefas) {
+        this.todasAsTarefas = todasAsTarefas;
     }
 }
