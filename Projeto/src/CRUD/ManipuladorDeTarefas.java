@@ -1,12 +1,22 @@
 package CRUD;
 import Principais.*;
-
+import Importantes.*;
 import javax.sound.midi.SoundbankResource;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManipuladorDeTarefas {
 
+
+
+    public ManipuladorDeTarefas() throws FileNotFoundException {
+            Persistencia persistencia = new Persistencia();
+            if (persistencia.recuperarTarefas().getTarefas().isEmpty()){
+                persistencia.recuperarTarefas().setTarefas(null);
+            }
+            this.todasAsTarefas = persistencia.recuperarTarefas().getTarefas();
+        }
         private List<Tarefa> todasAsTarefas = new ArrayList<>();
 
 

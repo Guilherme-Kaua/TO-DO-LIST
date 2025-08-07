@@ -427,7 +427,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
 
                 // Adicionar à central (assumindo que central.adicionarTarefa() existe)
                 central.adicionarTarefa(tarefa);
-                persistencia.salvarCentral(central);
+                persistencia.salvarTarefas(central);
                 ManipuladorDeTarefas central = persistencia.recuperarTarefas();
 
                 // Feedback ao usuário

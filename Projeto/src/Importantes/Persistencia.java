@@ -12,14 +12,14 @@ import java.io.*;
 public class Persistencia {
 
     //cria o objeto xstream para converter outros objetos
-    private final XStream xstream = new XStream(new DomDriver());
+    private XStream xstream = new XStream(new DomDriver());
 
     //cria o arquivo
-    private final File arquivoTarefas = new File("tarefas.xml");
-    private final File arquivoEventos = new File("eventos.xml");
+    private File arquivoTarefas = new File("tarefa.xml");
+    private File arquivoEventos = new File("evento.xml");
 
 
-    public void salvarCentral(ManipuladorDeTarefas tarefas) throws IOException {
+    public void salvarTarefas(ManipuladorDeTarefas tarefas) throws IOException {
 
         //convertendo objeto em uma String em formato xml
         String xml = xstream.toXML(tarefas);
@@ -29,33 +29,6 @@ public class Persistencia {
 
         //gravar as informaçoes no arquivo
         PrintWriter gravar = new PrintWriter(arquivoTarefas);
-        gravar.print(xml);
-        gravar.close();
-
-    }
-
-    public ManipuladorDeEventos recuperarEventos() throws FileNotFoundException {
-        xstream.addPermission(AnyTypePermission.ANY);
-        if(arquivoTarefas.exists()){
-
-            FileInputStream fis = new FileInputStream(arquivoTarefas);
-
-            return (ManipuladorDeEventos) xstream.fromXML(fis);
-        }
-        //se o arquivo nao existir retorna uma nova instancia de estoque
-        return new ManipuladorDeEventos();
-    }
-
-    public void salvarEventos(ManipuladorDeEventos eventos) throws IOException {
-
-        //convertendo objeto em uma String em formato xml
-        String xml = xstream.toXML(eventos);
-
-        //se arquivo não existe, ele cria um
-        if(!arquivoEventos.exists()) arquivoTarefas.createNewFile();
-
-        //gravar as informaçoes no arquivo
-        PrintWriter gravar = new PrintWriter(arquivoEventos);
         gravar.print(xml);
         gravar.close();
 
@@ -72,6 +45,35 @@ public class Persistencia {
         //se o arquivo nao existir retorna uma nova instancia de estoque
         return new ManipuladorDeTarefas();
     }
+
+    public ManipuladorDeEventos recuperarEventos() throws FileNotFoundException {
+        xstream.addPermission(AnyTypePermission.ANY);
+        if(arquivoEventos.exists()){
+
+            FileInputStream fis = new FileInputStream(arquivoEventos);
+
+            return (ManipuladorDeEventos) xstream.fromXML(fis);
+        }
+        //se o arquivo nao existir retorna uma nova instancia de estoque
+        return new ManipuladorDeEventos();
+    }
+
+    public void salvarEventos(ManipuladorDeEventos eventos) throws IOException {
+
+        //convertendo objeto em uma String em formato xml
+        String xml = xstream.toXML(eventos);
+
+        //se arquivo não existe, ele cria um
+        if(!arquivoEventos.exists()) arquivoEventos.createNewFile();
+
+        //gravar as informaçoes no arquivo
+        PrintWriter gravar = new PrintWriter(arquivoEventos);
+        gravar.print(xml);
+        gravar.close();
+
+    }
+
+
 
 
 

@@ -1,3 +1,5 @@
+package testes;
+
 import CRUD.ManipuladorDeTarefas;
 import Importantes.GeradorDeRelatorios;
 import Importantes.Mensageiro;
@@ -14,17 +16,20 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
         Persistencia persistencia = new Persistencia();
-        ManipuladorDeTarefas central = persistencia.recuperarTarefas();
+        ManipuladorDeTarefas central = new ManipuladorDeTarefas();
 
         loop:
         while (true) {
-            System.out.println(
-                    "1 - nova tarefa\n" +
-                            "2 - listar todas as tarefas\n" +
-                            "3 - exibir informações de uma tarefa específica\n" +
-                            "4 - gerar relatório de tarefas de um dia específico\n" +
-                            "5 - enviar email com PDF\n" +
-                            "s - sair"
+
+            System.out.println("""
+                    1 - nova tarefa 
+                    2 - listar todas as tarefas 
+                    3 - exibir informações de uma tarefa específica 
+                    4 - gerar relatório de tarefas de um dia específico 
+                    5 - enviar email com PDF
+                    s - sair"
+                           \s"""
+
             );
 
             String escolha = input.nextLine();
@@ -48,6 +53,7 @@ public class Main {
                                 )
                         );
                         central.adicionarTarefa(tarefa);
+                        persistencia.salvarTarefas(central);
                     } catch (Exception e) {
                         TratarErrosException.imprimirErroFormatado(e);
                     }
@@ -55,10 +61,10 @@ public class Main {
 
                 case "2":
                     try{
-                        if (persistencia.recuperarTarefas().getTarefas().isEmpty()){
+                        if (central.getTarefas().isEmpty()){
                             throw new NullPointerException();
                         }
-                        persistencia.recuperarTarefas().getTarefas();
+                        central.listarTarefas();
 
                     } catch (Exception e) {
                         System.out.println("\nNão tem tarefas disponíveis para mostrar\n");;
@@ -117,7 +123,7 @@ public class Main {
                     break;
                 case "s":
                     input.close();
-                    persistencia.salvarCentral(central);
+                    persistencia.salvarTarefas(central);
                     System.out.println("Obrigado por usar. Saindo...");
                     break loop;
 
