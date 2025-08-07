@@ -1,9 +1,10 @@
+package Importantes;
+
 import jakarta.mail.Session;
 
 import jakarta.mail.Message;
 import jakarta.mail.Multipart;
 import jakarta.mail.PasswordAuthentication;
-import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeBodyPart;
@@ -13,8 +14,6 @@ import jakarta.mail.internet.MimeMultipart;
 import java.time.LocalDate;
 import java.util.Properties;
 import java.io.File;
-import java.time.LocalDate;
-import java.util.Properties;
 
 
 public class Mensageiro {

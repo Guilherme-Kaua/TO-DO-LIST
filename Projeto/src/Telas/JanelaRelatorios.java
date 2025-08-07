@@ -80,7 +80,7 @@ public class JanelaRelatorios extends JFrame {
     }
 
     private void configurarEventos() {
-        // Evento do botão PDF
+        // Principais.Evento do botão PDF
         botaoPdf.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Exportando para PDF...");
@@ -88,7 +88,7 @@ public class JanelaRelatorios extends JFrame {
             }
         });
 
-        // Evento do botão Planilha
+        // Principais.Evento do botão Planilha
         botaoPlanilha.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Exportando para planilha...");
@@ -96,7 +96,7 @@ public class JanelaRelatorios extends JFrame {
             }
         });
 
-        // Evento do botão Email
+        // Principais.Evento do botão Email
         botaoEmail.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Preparando envio por e-mail...");

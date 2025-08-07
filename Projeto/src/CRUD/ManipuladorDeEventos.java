@@ -2,7 +2,7 @@ package CRUD;
 
 public class ManipuladorDeEventos  {
 
-   // public Evento CriarEvento(String descricao);
+   // public Principais.Evento CriarEvento(String descricao);
 
 
 }

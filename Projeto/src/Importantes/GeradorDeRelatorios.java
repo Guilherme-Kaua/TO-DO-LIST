@@ -1,3 +1,6 @@
+package Importantes;
+
+import Principais.Tarefa;
 import com.itextpdf.text.Document;
 
 import com.itextpdf.text.PageSize;
@@ -5,7 +8,6 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.time.LocalDate;
 
 public class GeradorDeRelatorios {
 

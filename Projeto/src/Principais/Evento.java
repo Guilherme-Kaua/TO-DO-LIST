@@ -1,3 +1,5 @@
+package Principais;
+
 import java.time.LocalDate;
 
 public class Evento {
@@ -22,7 +24,7 @@ public class Evento {
     }
 
     public String toString(){
-        return "Evento:"+ " " + titulo + " " + "Acontecerá dia:" + " " + dataEvento;
+        return "Principais.Evento:"+ " " + titulo + " " + "Acontecerá dia:" + " " + dataEvento;
     }
     public String getDescricao() {
         return descricao;

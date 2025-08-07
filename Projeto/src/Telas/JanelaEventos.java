@@ -40,12 +40,12 @@ public class JanelaEventos extends JFrame {
         abas = new JTabbedPane();
 
         // Painel "Todas"
-        botaoAdicionar = new JButton("+ Adicionar Evento");
+        botaoAdicionar = new JButton("+ Adicionar Principais.Evento");
         inputTitulo = new JTextArea();
         inputDesc = new JTextArea();
         inputData = new JTextArea();
-        botaoEditar = new JButton("Editar Evento");
-        botaoExcluir = new JButton("Excluir Evento");
+        botaoEditar = new JButton("Editar Principais.Evento");
+        botaoExcluir = new JButton("Excluir Principais.Evento");
         botaoVoltar= new JButton("Voltar");
 
         // Painel "Sair"
@@ -109,7 +109,7 @@ public class JanelaEventos extends JFrame {
                 JOptionPane.showMessageDialog(this, "Preencha pelo menos título e data!");
             } else {
                 // Aqui você adicionaria o evento à lista
-                JOptionPane.showMessageDialog(this, "Evento adicionado com sucesso!");
+                JOptionPane.showMessageDialog(this, "Principais.Evento adicionado com sucesso!");
                 limparCampos();
             }
         });

@@ -171,7 +171,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
         JPanel painel = new JPanel(new BorderLayout());
 
 
-        JLabel labelTitulo = new JLabel("Editar Tarefa", SwingConstants.CENTER);
+        JLabel labelTitulo = new JLabel("Editar Principais.Tarefa", SwingConstants.CENTER);
         labelTitulo.setFont(new Font("Rockwell", Font.PLAIN, 30));
         painel.add(labelTitulo, BorderLayout.NORTH);
 
@@ -212,7 +212,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
         JPanel painel = new JPanel(new BorderLayout());
 
 
-        JLabel labelTitulo = new JLabel("Excluir Tarefa", SwingConstants.CENTER);
+        JLabel labelTitulo = new JLabel("Excluir Principais.Tarefa", SwingConstants.CENTER);
         labelTitulo.setFont(new Font("Rockwell", Font.PLAIN, 30));
         painel.add(labelTitulo, BorderLayout.NORTH);
 
@@ -231,7 +231,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
         painelSelecao.add(comboExcluir);
 
 
-        JButton btnExcluir = new JButton("Excluir Tarefa");
+        JButton btnExcluir = new JButton("Excluir Principais.Tarefa");
 
         painelPrincipal.add(painelSelecao);
         painel.add(painelPrincipal, BorderLayout.CENTER);
@@ -275,7 +275,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
             });
 
             JOptionPane.showMessageDialog(this,
-                    "Tarefa cadastrada com sucesso!",
+                    "Principais.Tarefa cadastrada com sucesso!",
                     "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
 
@@ -345,7 +345,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
             if (confirmacao == JOptionPane.YES_OPTION) {
                 tableModel.removeRow(tabelaTarefas.getSelectedRow());
                 JOptionPane.showMessageDialog(this,
-                        "Tarefa excluída com sucesso!",
+                        "Principais.Tarefa excluída com sucesso!",
                         "Sucesso",
                         JOptionPane.INFORMATION_MESSAGE);
             }

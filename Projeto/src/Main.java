@@ -1,3 +1,9 @@
+import CRUD.ManipuladorDeTarefas;
+import Importantes.GeradorDeRelatorios;
+import Importantes.Mensageiro;
+import Importantes.Persistencia;
+import Principais.Tarefa;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -8,7 +14,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
         Persistencia persistencia = new Persistencia();
-        CentralDeInformacoes central = persistencia.recuperarCentral();
+        ManipuladorDeTarefas central = persistencia.recuperarCentral();
 
         loop:
         while (true) {
