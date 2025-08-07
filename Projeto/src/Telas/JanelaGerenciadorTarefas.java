@@ -5,6 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -25,21 +27,29 @@ public class JanelaGerenciadorTarefas extends JFrame {
     private JTextField campoData;
     private JComboBox<String> comboNivel;
     private JButton botaoVoltar;
+    private ManipuladorDeTarefas manipuladorDeTarefas;
+    private  Persistencia persistencia;
 
-    public JanelaGerenciadorTarefas() {
+
+    public JanelaGerenciadorTarefas() throws FileNotFoundException {
+        this.manipuladorDeTarefas = new ManipuladorDeTarefas();
         configurarJanela();
         inicializarComponentes();
         configurarAbas();
         configurarEventos();
+        carregarTarefasNaTabela();
+
+
     }
 
-    private void configurarJanela() {
+    private void configurarJanela() throws FileNotFoundException {
         setTitle("Gerenciador de Tarefas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 500);
         setLocationRelativeTo(null);
         setResizable(false);
         setLayout(new BorderLayout());
+
     }
 
     private void inicializarComponentes() {
@@ -53,6 +63,28 @@ public class JanelaGerenciadorTarefas extends JFrame {
         tableModel.addColumn("Nível");
 
         tabelaTarefas = new JTable(tableModel);
+
+    }
+    private void salvarTarefas() {
+        try {
+            persistencia.salvarTarefas(manipuladorDeTarefas);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar as tarefas: " + ex.getMessage(), "Erro de Persistência", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void carregarTarefasNaTabela() {
+        tableModel.setRowCount(0); // Limpa a tabela antes de carregar
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        if (manipuladorDeTarefas.getTarefas() != null) {
+            for (Tarefa tarefa : manipuladorDeTarefas.getTarefas()) {
+                tableModel.addRow(new Object[]{
+                        tarefa.getTitulo(),
+                        tarefa.getDescricao(),
+                        tarefa.getDeadline().format(formatter),
+                        tarefa.getNivel()
+                });
+            }
+        }
     }
 
     private void configurarAbas() {
@@ -189,6 +221,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
         JPanel painelSelecao = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel labelSelecionar = new JLabel("Selecione a tarefa:");
         labelSelecionar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
         JComboBox<String> comboEditar = new JComboBox<>();
         comboEditar.setPreferredSize(new Dimension(300, 30));
         painelSelecao.add(labelSelecionar);
@@ -296,8 +329,10 @@ public class JanelaGerenciadorTarefas extends JFrame {
         btnVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                salvarTarefas();
                 dispose();
                 new Menu().setVisible(true);
+
             }
         });
         btnAtualizar.addActionListener(e -> {
@@ -356,7 +391,12 @@ public class JanelaGerenciadorTarefas extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JanelaGerenciadorTarefas janela = new JanelaGerenciadorTarefas();
+            JanelaGerenciadorTarefas janela = null;
+            try {
+                janela = new JanelaGerenciadorTarefas();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             janela.setVisible(true);
         });
     }
@@ -426,9 +466,10 @@ public class JanelaGerenciadorTarefas extends JFrame {
                 Tarefa tarefa = new Tarefa(titulo, titulo, deadline);
 
                 // Adicionar à central (assumindo que central.adicionarTarefa() existe)
+
                 central.adicionarTarefa(tarefa);
                 persistencia.salvarTarefas(central);
-                ManipuladorDeTarefas central = persistencia.recuperarTarefas();
+
 
                 // Feedback ao usuário
                 JOptionPane.showMessageDialog(janela, "Tarefa cadastrada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
