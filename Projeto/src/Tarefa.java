@@ -1,19 +1,39 @@
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Tarefa {
     private long id = System.currentTimeMillis();
     private String titulo;
     private String descricao;
     private LocalDate deadline;
+    private int nivel;
 
-    public Tarefa(String titulo, String descricao, LocalDate deadline) {
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public Tarefa(String titulo, String descricao, LocalDate deadline, int nivel ) {
         if (titulo.isEmpty() || descricao.isEmpty()){
             throw new NullPointerException();
         }
         this.titulo = titulo;
         this.descricao = descricao;
         this.deadline = deadline;
+        this.nivel=nivel;
+    }
+    public Tarefa(String titulo, String descricao, LocalDate deadline){
+        if (titulo.isEmpty() || descricao.isEmpty()){
+            throw new NullPointerException();
+        }
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.deadline = deadline;
+    }
+    public Tarefa(){
+
     }
 
     public boolean equals(Tarefa outro) {
