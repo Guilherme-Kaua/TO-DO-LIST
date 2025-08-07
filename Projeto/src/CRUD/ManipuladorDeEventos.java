@@ -13,14 +13,8 @@ public class ManipuladorDeEventos  {
 
     private List<Evento> todosOsEventos = new ArrayList<>();
 
-
-
     public ManipuladorDeEventos() throws FileNotFoundException {
-        Persistencia persistencia = new Persistencia();
-        if (persistencia.recuperarEventos().getEventos().isEmpty()){
-            persistencia.recuperarEventos().setEventos(null);
-        }
-        this.todosOsEventos = persistencia.recuperarEventos().getEventos();
+        this.todosOsEventos = new ArrayList<>();
     }
 
 

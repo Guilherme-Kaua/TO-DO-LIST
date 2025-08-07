@@ -10,15 +10,12 @@ import java.util.List;
 
 public class ManipuladorDeTarefas {
 
-
-    public ManipuladorDeTarefas() throws FileNotFoundException {
-            Persistencia persistencia = new Persistencia();
-            if (persistencia.recuperarTarefas().getTarefas().isEmpty()){
-                persistencia.recuperarTarefas().setTarefas(null);
-            }
-            this.todasAsTarefas = persistencia.recuperarTarefas().getTarefas();
-        }
         private List<Tarefa> todasAsTarefas = new ArrayList<>();
+
+        public ManipuladorDeTarefas() {
+            this.todasAsTarefas = new ArrayList<>();
+        }
+
 
 
         public void adicionarTarefa(Tarefa obj) throws Exception {

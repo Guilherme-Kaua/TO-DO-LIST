@@ -12,12 +12,15 @@ import java.io.*;
 public class Persistencia {
 
     //cria o objeto xstream para converter outros objetos
-    private XStream xstream = new XStream(new DomDriver());
-
+    private XStream xstream;
     //cria o arquivo
     private File arquivoTarefas = new File("tarefa.xml");
     private File arquivoEventos = new File("evento.xml");
 
+    public Persistencia() {
+        this.xstream = new XStream(new DomDriver());
+        this.xstream.addPermission(AnyTypePermission.ANY);
+    }
 
     public void salvarTarefas(ManipuladorDeTarefas tarefas) throws IOException {
 
@@ -35,7 +38,7 @@ public class Persistencia {
     }
 
     public ManipuladorDeTarefas recuperarTarefas() throws FileNotFoundException {
-        xstream.addPermission(AnyTypePermission.ANY);
+
         if(arquivoTarefas.exists()){
 
             FileInputStream fis = new FileInputStream(arquivoTarefas);
@@ -47,7 +50,7 @@ public class Persistencia {
     }
 
     public ManipuladorDeEventos recuperarEventos() throws FileNotFoundException {
-        xstream.addPermission(AnyTypePermission.ANY);
+
         if(arquivoEventos.exists()){
 
             FileInputStream fis = new FileInputStream(arquivoEventos);
