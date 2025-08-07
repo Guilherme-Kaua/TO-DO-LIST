@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 
 public class Menu extends JFrame {
 
@@ -81,7 +82,12 @@ public class Menu extends JFrame {
 
                 dispose();
                 SwingUtilities.invokeLater(() -> {
-                    JanelaGerenciadorTarefas gerenciador = new JanelaGerenciadorTarefas();
+                    JanelaGerenciadorTarefas gerenciador = null;
+                    try {
+                        gerenciador = new JanelaGerenciadorTarefas();
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     gerenciador.setVisible(true);
                 });
             }

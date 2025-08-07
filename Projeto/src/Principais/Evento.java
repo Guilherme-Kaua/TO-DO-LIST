@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class Evento {
 
+    private long id = System.currentTimeMillis();
     private String descricao;
     private String titulo;
     private LocalDate dataCadastro;
@@ -58,5 +59,12 @@ public class Evento {
         this.dataEvento = dataEvento;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
 }
