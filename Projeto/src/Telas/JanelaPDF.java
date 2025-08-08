@@ -2,7 +2,7 @@ package Telas;
 
 import CRUD.ManipuladorDeTarefas;
 import Importantes.GeradorDeRelatorios;
-import Importantes.Persistencia;
+import Importantes.PersistenciaTarefa;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,11 +12,11 @@ import java.time.LocalDate;
 public class JanelaPDF extends JFrame {
     private JTextField campoData;
     private ManipuladorDeTarefas manipuladorDeTarefas;
-    private Persistencia persistencia;
+    private PersistenciaTarefa persistenciaTarefa;
 
     public JanelaPDF() throws FileNotFoundException {
-        this.persistencia= new Persistencia();
-        this.manipuladorDeTarefas = persistencia.recuperarTarefas();
+        this.persistenciaTarefa = new PersistenciaTarefa();
+        this.manipuladorDeTarefas = persistenciaTarefa.recuperarTarefas();
         configurarJanela();
         inicializarComponentes();
         setVisible(true);

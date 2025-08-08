@@ -98,7 +98,12 @@ public class Menu extends JFrame {
 
                 dispose();
                 SwingUtilities.invokeLater(() -> {
-                    JanelaEventos gerenciador = new JanelaEventos();
+                    JanelaEventos gerenciador = null;
+                    try {
+                        gerenciador = new JanelaEventos();
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     gerenciador.setVisible(true);
 
                 });

@@ -2,23 +2,25 @@ package Telas;
 
 import CRUD.ManipuladorDeTarefas;
 import Importantes.Mensageiro;
-import Importantes.Persistencia;
+import Importantes.PersistenciaTarefa;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class JanelaMensageiro extends JFrame {
     private JTextField campoEmail;
     private JTextField campoData;
     private Mensageiro mensageiro;
+
     private ManipuladorDeTarefas manipuladorDeTarefas;
-    private Persistencia persistencia;
+    private PersistenciaTarefa persistenciaTarefa;
+
     public JanelaMensageiro() throws FileNotFoundException {
-        this.persistencia= new Persistencia();
-        this.manipuladorDeTarefas= persistencia.recuperarTarefas();
+
+        this.persistenciaTarefa = new PersistenciaTarefa();
+        this.manipuladorDeTarefas= persistenciaTarefa.recuperarTarefas();
         this.mensageiro= new Mensageiro();
         configurarJanela();
         inicializarComponentes();

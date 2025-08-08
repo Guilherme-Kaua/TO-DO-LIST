@@ -1,14 +1,12 @@
 package Telas;
 
 import CRUD.ManipuladorDeTarefas;
-import Importantes.Persistencia;
+import Importantes.PersistenciaTarefa;
 import Principais.Tarefa;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -30,21 +28,20 @@ public class JanelaGerenciadorTarefas extends JFrame {
 
     // --- Lógica e Persistência de Dados ---
     private ManipuladorDeTarefas manipuladorDeTarefas;
-    private final Persistencia persistencia;
+    private final PersistenciaTarefa persistenciaTarefa;
 
     /**
      * Construtor principal da janela.
      */
     public JanelaGerenciadorTarefas() throws FileNotFoundException {
         // 1. Inicializa a persistência e carrega os dados existentes
-        this.persistencia = new Persistencia();
-        this.manipuladorDeTarefas = persistencia.recuperarTarefas(); // Carrega tarefas salvas
+        this.persistenciaTarefa = new PersistenciaTarefa();
+        this.manipuladorDeTarefas = persistenciaTarefa.recuperarTarefas(); // Carrega tarefas salvas
 
         // 2. Configura a janela e seus componentes
         configurarJanela();
         inicializarComponentes();
         configurarAbas();
-        configurarEventos();
 
         // 3. Popula a tabela com os dados carregados
         carregarTarefasNaTabela();
@@ -168,7 +165,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
         JButton btnAtualizar = new JButton("Atualizar Lista do Arquivo");
         btnAtualizar.addActionListener(e -> {
             try {
-                this.manipuladorDeTarefas = persistencia.recuperarTarefas();
+                this.manipuladorDeTarefas = persistenciaTarefa.recuperarTarefas();
                 carregarTarefasNaTabela();
                 JOptionPane.showMessageDialog(this, "Lista de tarefas atualizada!", "Informação", JOptionPane.INFORMATION_MESSAGE);
             } catch (FileNotFoundException ex) {
@@ -208,7 +205,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
 
     private void salvarTarefas() {
         try {
-            persistencia.salvarTarefas(this.manipuladorDeTarefas);
+            persistenciaTarefa.salvarTarefas(this.manipuladorDeTarefas);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Erro ao salvar as tarefas: " + ex.getMessage(), "Erro de Persistência", JOptionPane.ERROR_MESSAGE);
         }
@@ -297,22 +294,12 @@ public class JanelaGerenciadorTarefas extends JFrame {
     }
 
     private void voltarAoMenu() {
-        salvarTarefas(); // Garante que tudo seja salvo antes de sair
+        // Garante que tudo seja salvo antes de sair
         dispose();
         new Menu().setVisible(true);
     }
 
-    /**
-     * Deixei este método vazio, pois a lógica de eventos foi movida para
-     * dentro dos métodos de criação de abas, tornando o código mais modular.
-     */
-    private void configurarEventos() {
-        // Eventos agora são configurados nos métodos que criam os componentes
-    }
-
-    /**
-     * Método Main para execução standalone da janela.
-     */
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {

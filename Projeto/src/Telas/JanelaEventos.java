@@ -1,8 +1,18 @@
 package Telas;
 
+import CRUD.ManipuladorDeEventos;
+import Importantes.PersistenciaEvento;
+import Principais.Evento;
+import Principais.Tarefa;
+
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class JanelaEventos extends JFrame {
     // Componentes principais
@@ -12,6 +22,8 @@ public class JanelaEventos extends JFrame {
     private JPanel painelDia;
     private JPanel painelSair;
     private JButton botaoVoltar;
+    private DefaultTableModel tableModel;
+    private JTable tabelaEventos;
 
     // Componentes do painel "Todas"
     private JButton botaoAdicionar;
@@ -22,11 +34,17 @@ public class JanelaEventos extends JFrame {
     private JButton botaoExcluir;
     private JButton botaoSair;
 
-    public JanelaEventos() {
+    private PersistenciaEvento persistenciaEvento;
+    private ManipuladorDeEventos manipuladorDeEventos;
+
+    public JanelaEventos() throws FileNotFoundException {
+        this.persistenciaEvento = new PersistenciaEvento();
+        this.manipuladorDeEventos = persistenciaEvento.recuperarEventos();
         configurarJanela();
         inicializarComponentes();
         configurarLayout();
-        configurarEventos();
+        adicionarEventos();
+        carregarEventosNaTabela();
     }
 
     private void configurarJanela() {
@@ -40,7 +58,7 @@ public class JanelaEventos extends JFrame {
         abas = new JTabbedPane();
 
         // Painel "Todas"
-        botaoAdicionar = new JButton("+ Adicionar Principais.Evento");
+        botaoAdicionar = new JButton("+ Adicionar Evento");
         inputTitulo = new JTextArea();
         inputDesc = new JTextArea();
         inputData = new JTextArea();
@@ -48,10 +66,25 @@ public class JanelaEventos extends JFrame {
         botaoExcluir = new JButton("Excluir Evento");
         botaoVoltar= new JButton("Voltar");
 
+        // Modelo da tabela para listagem
+        tableModel = new DefaultTableModel();
+        tableModel.addColumn("Título");
+        tableModel.addColumn("Descrição");
+        tableModel.addColumn("Data");
+
+        tabelaEventos = new JTable(tableModel);
+
         // Painel "Sair"
         botaoSair = new JButton("Sair");
     }
+    private void salvarEventos() {
+        try {
 
+            persistenciaEvento.salvarEventos(this.manipuladorDeEventos);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar as tarefas: " + ex.getMessage(), "Erro de Persistência", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     private void configurarLayout() {
         // Configuração do painel "Todas"
         painelTodas = new JPanel(new BorderLayout());
@@ -89,6 +122,7 @@ public class JanelaEventos extends JFrame {
 
         // Adicionando abas
         abas.addTab("Todas", painelTodas);
+        abas.addTab("Listar Eventos", tabelaEventos);
         abas.addTab("Listar por mês", painelMes);
         abas.addTab("Listar por dia", painelDia);
         abas.addTab("Sair", painelSair);
@@ -96,7 +130,22 @@ public class JanelaEventos extends JFrame {
         add(abas);
     }
 
-    private void configurarEventos() {
+    private void carregarEventosNaTabela() {
+
+        tableModel.setRowCount(0); // Limpa a tabela para evitar duplicatas
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        if (manipuladorDeEventos.getEventos() != null) {
+            for (Evento evento : manipuladorDeEventos.getEventos()) {
+                tableModel.addRow(new Object[]{
+                        evento.getTitulo(),
+                        evento.getDescricao(),
+                        evento.getDataEvento().format(formatter),
+                });
+            }
+        }
+    }
+
+    private void adicionarEventos() {
         botaoSair.addActionListener(e -> System.exit(0));
 
         botaoAdicionar.addActionListener(e -> {
@@ -109,7 +158,25 @@ public class JanelaEventos extends JFrame {
                 JOptionPane.showMessageDialog(this, "Preencha pelo menos título e data!");
             } else {
                 // Aqui você adicionaria o evento à lista
-                JOptionPane.showMessageDialog(this, "Principais.Evento adicionado com sucesso!");
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate deadline = LocalDate.parse(inputData.getText(), formatter);
+
+                    Evento novoEvento = new Evento(
+                            inputTitulo.getText(),
+                            inputDesc.getText(),
+                            deadline
+                    );
+
+                    manipuladorDeEventos.adicionarEvento(novoEvento);
+                    salvarEventos();
+                    carregarEventosNaTabela();
+
+
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+                JOptionPane.showMessageDialog(this, "Evento adicionado com sucesso!");
                 limparCampos();
             }
         });
@@ -149,6 +216,12 @@ public class JanelaEventos extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new JanelaEventos().setVisible(true));
+        SwingUtilities.invokeLater(() -> {
+            try {
+                new JanelaEventos().setVisible(true);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
