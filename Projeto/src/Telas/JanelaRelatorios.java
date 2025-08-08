@@ -17,6 +17,7 @@ public class JanelaRelatorios extends JFrame {
     private JButton botaoPlanilha;
     private JPanel painelBotoes;
     private JButton botaoVoltar;
+
     public JanelaRelatorios() {
         configurarJanela();
         inicializarComponentes();
@@ -34,15 +35,12 @@ public class JanelaRelatorios extends JFrame {
     }
 
     private void inicializarComponentes() {
-
         labelTitulo = new JLabel("Relatórios", SwingConstants.CENTER);
         labelTitulo.setFont(new Font("Rockwell", Font.PLAIN, 44));
-
 
         botaoPdf = new JButton("Exportar relatório no formato PDF");
         botaoPdf.setFont(new Font("Tahoma", Font.PLAIN, 20));
         botaoPdf.setFocusPainted(false);
-
 
         botaoEmail = new JButton("Enviar as tarefas por e-mail");
         botaoEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -52,7 +50,7 @@ public class JanelaRelatorios extends JFrame {
         botaoPlanilha.setFont(new Font("Tahoma", Font.PLAIN, 20));
         botaoPlanilha.setFocusPainted(false);
 
-        botaoVoltar= new JButton("Voltar");
+        botaoVoltar = new JButton("Voltar");
         botaoVoltar.setFont(new Font("Tahoma", Font.PLAIN, 20));
         botaoVoltar.setFocusPainted(false);
 
@@ -60,10 +58,8 @@ public class JanelaRelatorios extends JFrame {
     }
 
     private void configurarLayout() {
-
         painelBotoes.setLayout(new BoxLayout(painelBotoes, BoxLayout.Y_AXIS));
         painelBotoes.setBorder(new EmptyBorder(50, 0, 50, 0));
-
 
         botaoPdf.setAlignmentX(Component.CENTER_ALIGNMENT);
         botaoPlanilha.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -80,11 +76,10 @@ public class JanelaRelatorios extends JFrame {
 
         add(labelTitulo, BorderLayout.NORTH);
         add(painelBotoes, BorderLayout.CENTER);
-
     }
 
     private void configurarEventos() {
-        // Principais.Evento do botão PDF
+        // Evento do botão PDF
         botaoPdf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,7 +96,7 @@ public class JanelaRelatorios extends JFrame {
             }
         });
 
-        // Principais.Evento do botão Planilha
+        // Evento do botão Planilha
         botaoPlanilha.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Exportando para planilha...");
@@ -109,13 +104,23 @@ public class JanelaRelatorios extends JFrame {
             }
         });
 
-        // Principais.Evento do botão Email
+        // Evento do botão Email
         botaoEmail.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Preparando envio por e-mail...");
-                //Mensageiro.enviarEmailComPdf()
+                dispose();
+                SwingUtilities.invokeLater(() -> {
+                    JanelaMensageiro mensageiro = null;
+                    try {
+                        mensageiro = new JanelaMensageiro();
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    mensageiro.setVisible(true);
+                });
             }
         });
+
+        // Evento do botão Voltar
         botaoVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
