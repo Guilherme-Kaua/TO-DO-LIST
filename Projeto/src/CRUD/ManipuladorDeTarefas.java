@@ -1,9 +1,6 @@
 package CRUD;
 import Principais.*;
-import Importantes.*;
-import javax.sound.midi.SoundbankResource;
-import javax.swing.*;
-import java.io.FileNotFoundException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +12,6 @@ public class ManipuladorDeTarefas {
         public ManipuladorDeTarefas() {
             this.todasAsTarefas = new ArrayList<>();
         }
-
-
 
         public void adicionarTarefa(Tarefa obj) throws Exception {
             for(Tarefa valor: todasAsTarefas){

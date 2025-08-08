@@ -1,10 +1,19 @@
 package Telas;
 
+import CRUD.ManipuladorDeEventos;
+import Importantes.PersistenciaEvento;
+import Principais.Evento;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class JanelaEventos extends JFrame {
+
     // Componentes principais
     private JTabbedPane abas;
     private JPanel painelTodas;
@@ -22,11 +31,16 @@ public class JanelaEventos extends JFrame {
     private JButton botaoExcluir;
     private JButton botaoSair;
 
-    public JanelaEventos() {
+    private ManipuladorDeEventos manipuladorDeEventos;
+    private final PersistenciaEvento persistenciaEventos;
+
+    public JanelaEventos() throws FileNotFoundException {
+        this.persistenciaEventos = new PersistenciaEvento();
+        this.manipuladorDeEventos = persistenciaEventos.recuperarEventos();
         configurarJanela();
         inicializarComponentes();
         configurarLayout();
-        configurarEventos();
+        AdicionarEventos();
     }
 
     private void configurarJanela() {
@@ -96,7 +110,16 @@ public class JanelaEventos extends JFrame {
         add(abas);
     }
 
-    private void configurarEventos() {
+    private void salvarEventos() {
+        try {
+
+            persistenciaEventos.salvarEventos(this.manipuladorDeEventos);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao salvar as tarefas: " + ex.getMessage(), "Erro de Persistência", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void AdicionarEventos() {
         botaoSair.addActionListener(e -> System.exit(0));
 
         botaoAdicionar.addActionListener(e -> {
@@ -109,6 +132,22 @@ public class JanelaEventos extends JFrame {
                 JOptionPane.showMessageDialog(this, "Preencha pelo menos título e data!");
             } else {
                 // Aqui você adicionaria o evento à lista
+                try {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate deadline = LocalDate.parse(inputData.getText(), formatter);
+
+                    Evento novoEvento = new Evento(
+                            inputTitulo.getText(),
+                            inputDesc.getText(),
+                            deadline
+                    );
+
+                    manipuladorDeEventos.adicionarEvento(novoEvento);
+                    salvarEventos();
+
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
                 JOptionPane.showMessageDialog(this, "Principais.Evento adicionado com sucesso!");
                 limparCampos();
             }
@@ -149,6 +188,12 @@ public class JanelaEventos extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new JanelaEventos().setVisible(true));
+        SwingUtilities.invokeLater(() -> {
+            try {
+                new JanelaEventos().setVisible(true);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }

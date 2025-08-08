@@ -1,6 +1,5 @@
 package CRUD;
 
-import Importantes.Persistencia;
 import Principais.Evento;
 import Principais.Tarefa;
 
