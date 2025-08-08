@@ -12,52 +12,52 @@ public class ManipuladorDeTarefas {
 
 
     public ManipuladorDeTarefas() throws FileNotFoundException {
-            Persistencia persistencia = new Persistencia();
-            if (persistencia.recuperarTarefas().getTarefas().isEmpty()){
-                persistencia.recuperarTarefas().setTarefas(null);
+        Persistencia persistencia = new Persistencia();
+        if (persistencia.recuperarTarefas().getTarefas().isEmpty()){
+            persistencia.recuperarTarefas().setTarefas(null);
+        }
+        this.todasAsTarefas = persistencia.recuperarTarefas().getTarefas();
+    }
+    private List<Tarefa> todasAsTarefas = new ArrayList<>();
+
+
+    public void adicionarTarefa(Tarefa obj) throws Exception {
+        for(Tarefa valor: todasAsTarefas){
+            if (valor.equals(obj)){
+                throw new Exception("Não pode mesma tarefa repetida");
             }
-            this.todasAsTarefas = persistencia.recuperarTarefas().getTarefas();
         }
-        private List<Tarefa> todasAsTarefas = new ArrayList<>();
+        todasAsTarefas.add(obj);
+    }
 
-
-        public void adicionarTarefa(Tarefa obj) throws Exception {
-            for(Tarefa valor: todasAsTarefas){
-                if (valor.equals(obj)){
-                    throw new Exception("Não pode mesma tarefa repetida");
-                }
+    public Tarefa recuperarTarefaPorId(long id) {
+        for(Tarefa t: todasAsTarefas) {
+            if (t.getId() == id) {
+                return t;
             }
-            todasAsTarefas.add(obj);
         }
+        return null;
+    }
 
-        public Tarefa recuperarTarefaPorId(long id) {
-            for(Tarefa t: todasAsTarefas) {
-                if (t.getId() == id) {
-                    return t;
-                }
-            }
-            return null;
-        }
+    public void listarTarefas() {
+        todasAsTarefas.forEach(System.out::println);
+    }
 
-        public void listarTarefas() {
-            todasAsTarefas.forEach(System.out::println);
-        }
-
-        public void editarTarefa(Tarefa tarefa, String t, String d, LocalDate data, int prio){
-            tarefa.setTitulo(t);
-            tarefa.setDescricao(d);
-            tarefa.setDeadline(data);
-            tarefa.setNivel(prio);
-        }
+    public void editarTarefa(Tarefa tarefa, String t, String d, LocalDate data, int prio){
+        tarefa.setTitulo(t);
+        tarefa.setDescricao(d);
+        tarefa.setDeadline(data);
+        tarefa.setNivel(prio);
+    }
 
 
-        public void excluirTarefa(Tarefa tarefa){
-            todasAsTarefas.remove(tarefa);
-        }
+    public void excluirTarefa(Tarefa tarefa){
+        todasAsTarefas.remove(tarefa);
+    }
 
-        public List<Tarefa> getTarefas() {
-            return todasAsTarefas;
-        }
+    public List<Tarefa> getTarefas() {
+        return todasAsTarefas;
+    }
 
     public void setTarefas(List<Tarefa> todasAsTarefas) {
         this.todasAsTarefas = todasAsTarefas;
