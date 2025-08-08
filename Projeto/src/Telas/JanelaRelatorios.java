@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Importantes.*;
 
 public class JanelaRelatorios extends JFrame {
 
@@ -100,7 +101,7 @@ public class JanelaRelatorios extends JFrame {
         botaoEmail.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Preparando envio por e-mail...");
-                // Aqui você implementaria a lógica de envio por e-mail
+                //Mensageiro.enviarEmailComPdf()
             }
         });
         botaoVoltar.addActionListener(new ActionListener() {
