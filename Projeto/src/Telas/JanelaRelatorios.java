@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+
 import Importantes.*;
 
 public class JanelaRelatorios extends JFrame {
@@ -40,6 +42,7 @@ public class JanelaRelatorios extends JFrame {
         botaoPdf = new JButton("Exportar relatório no formato PDF");
         botaoPdf.setFont(new Font("Tahoma", Font.PLAIN, 20));
         botaoPdf.setFocusPainted(false);
+
 
         botaoEmail = new JButton("Enviar as tarefas por e-mail");
         botaoEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -83,9 +86,18 @@ public class JanelaRelatorios extends JFrame {
     private void configurarEventos() {
         // Principais.Evento do botão PDF
         botaoPdf.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Exportando para PDF...");
-
+                dispose();
+                SwingUtilities.invokeLater(() -> {
+                    JanelaPDF pdf = null;
+                    try {
+                        pdf = new JanelaPDF();
+                    } catch (FileNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    pdf.setVisible(true);
+                });
             }
         });
 

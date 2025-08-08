@@ -1,0 +1,11 @@
+<CRUD.ManipuladorDeTarefas>
+  <todasAsTarefas>
+    <Principais.Tarefa>
+      <id>1754657403810</id>
+      <titulo>oii</titulo>
+      <descricao>defefwf</descricao>
+      <deadline>2026-10-10</deadline>
+      <nivel>1</nivel>
+    </Principais.Tarefa>
+  </todasAsTarefas>
+</CRUD.ManipuladorDeTarefas>
