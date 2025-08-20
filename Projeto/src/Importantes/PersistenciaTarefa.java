@@ -47,10 +47,4 @@ public class PersistenciaTarefa {
         return new ManipuladorDeTarefas();
     }
 
-
-
-
-
-
-
 }
