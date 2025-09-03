@@ -13,16 +13,17 @@ public abstract class ItemAgenda {
     public abstract void adicionar();
 
 
-    public abstract Object recuperarPorId (long Id);
+    public abstract Object recuperarPorId (long id);
 
 
-    public void listarEventos() {
-        objects.forEach(System.out::println);
+    public void listarEventos(ArrayList<?> lista) {
+        lista.forEach(System.out::println);
     }
 
     public abstract void editar();
 
     public  void excluirEvento(long Id){
+
         objects.remove(evento);
     }
 

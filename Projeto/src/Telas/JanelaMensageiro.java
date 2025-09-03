@@ -1,8 +1,8 @@
 package Telas;
 
 import CRUD.ManipuladorDeTarefas;
-import Importantes.Mensageiro;
-import Importantes.PersistenciaTarefa;
+import Documentos.Mensageiro;
+import Persistencia.PersistenciaTarefa;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package Importantes;
+package Documentos;
 
 import CRUD.ManipuladorDeTarefas;
 import jakarta.mail.Session;
@@ -21,7 +21,7 @@ public class Mensageiro {
     public void enviarEmailComPdf(String email, LocalDate data, ManipuladorDeTarefas tarefas) throws Exception {
         // Configuração do servidor SMTP
         String host = "smtp.gmail.com";
-        final String username = "testedeemailspdfs@gmail.com";
+        final String username = "testedeemailspdfs@gmail.com"; //email que manda o relatório
         final String password = "pccrajhfqiqepefp"; // Use uma senha de app
 
         // Destinatário
@@ -49,7 +49,7 @@ public class Mensageiro {
 
         try {
             // 📝 Gera o PDF com base na data e tarefas
-            GeradorDeRelatorios.obterTarefasDeUmDia(data, tarefas);
+            GeradorDePdf.obterTarefasDeUmDia(data, tarefas);
 
             // Cria a mensagem
             Message message = new MimeMessage(session);

@@ -1,4 +1,4 @@
-package Importantes;
+package Documentos;
 
 import CRUD.ManipuladorDeTarefas;
 import Principais.Tarefa;
@@ -10,7 +10,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
-public class GeradorDeRelatorios {
+public class GeradorDePdf {
 
 
     public static <LocalDate> void obterTarefasDeUmDia(LocalDate data, ManipuladorDeTarefas tarefas) throws Exception {

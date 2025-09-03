@@ -1,4 +1,4 @@
-package Importantes;
+package Persistencia;
 
 import CRUD.ManipuladorDeTarefas;
 import com.thoughtworks.xstream.XStream;
@@ -37,11 +37,14 @@ public class PersistenciaTarefa {
 
     public ManipuladorDeTarefas recuperarTarefas() throws FileNotFoundException {
 
-        if(arquivoTarefas.exists()){
+        try {
 
-            FileInputStream fis = new FileInputStream(arquivoTarefas);
-
-            return (ManipuladorDeTarefas) xstream.fromXML(fis);
+            if (arquivoTarefas.exists()) {
+                FileInputStream fis = new FileInputStream(arquivoTarefas);
+                return (ManipuladorDeTarefas) xstream.fromXML(fis);
+            }
+        } catch (FileNotFoundException f) {
+            throw new FileNotFoundException("");
         }
         //se o arquivo nao existir retorna uma nova instancia de estoque
         return new ManipuladorDeTarefas();

@@ -1,16 +1,13 @@
 package CRUD;
 import Principais.*;
-import Importantes.*;
-import javax.sound.midi.SoundbankResource;
-import javax.swing.*;
-import java.io.FileNotFoundException;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManipuladorDeTarefas {
 
-        private List<Tarefa> todasAsTarefas = new ArrayList<>();
+        private List<Tarefa> todasAsTarefas;
 
         public ManipuladorDeTarefas() {
             this.todasAsTarefas = new ArrayList<>();
@@ -43,8 +40,8 @@ public class ManipuladorDeTarefas {
         public void editarTarefa(Tarefa tarefa, String t, String d, LocalDate data, int prio){
             tarefa.setTitulo(t);
             tarefa.setDescricao(d);
-            tarefa.setDeadline(data);
-            tarefa.setNivel(prio);
+            tarefa.setDataLimite(data);
+            tarefa.setNivel();
         }
 
 

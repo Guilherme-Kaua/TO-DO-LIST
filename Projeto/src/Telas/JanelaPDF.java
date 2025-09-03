@@ -1,8 +1,8 @@
 package Telas;
 
 import CRUD.ManipuladorDeTarefas;
-import Importantes.GeradorDeRelatorios;
-import Importantes.PersistenciaTarefa;
+import Documentos.GeradorDePdf;
+import Persistencia.PersistenciaTarefa;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,7 +57,7 @@ public class JanelaPDF extends JFrame {
                     Integer.parseInt(data[1]),
                     Integer.parseInt(data[0])
             );
-            GeradorDeRelatorios.obterTarefasDeUmDia(datateste,manipuladorDeTarefas);
+            GeradorDePdf.obterTarefasDeUmDia(datateste,manipuladorDeTarefas);
             JOptionPane.showMessageDialog(this, "PDF criado!");
 } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro");

@@ -1,7 +1,7 @@
 package Telas;
 
 import CRUD.ManipuladorDeTarefas;
-import Importantes.PersistenciaTarefa;
+import Persistencia.PersistenciaTarefa;
 import Principais.Tarefa;
 
 import javax.swing.*;

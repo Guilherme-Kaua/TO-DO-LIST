@@ -1,4 +1,4 @@
-package Importantes;
+package Persistencia;
 
 import CRUD.ManipuladorDeEventos;
 import com.thoughtworks.xstream.XStream;

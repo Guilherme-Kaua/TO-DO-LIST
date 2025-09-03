@@ -1,9 +1,8 @@
 package Telas;
 
 import CRUD.ManipuladorDeEventos;
-import Importantes.PersistenciaEvento;
+import Persistencia.PersistenciaEvento;
 import Principais.Evento;
-import Principais.Tarefa;
 
 import javax.swing.*;
 import javax.swing.border.Border;

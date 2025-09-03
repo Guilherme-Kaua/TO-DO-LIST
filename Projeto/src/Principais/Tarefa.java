@@ -1,78 +1,64 @@
 package Principais;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
 
-public class Tarefa {
+public class Tarefa extends DadosComuns{
 
-    private long id = System.currentTimeMillis();
-    private String titulo;
-    private String descricao;
-    private LocalDate deadline;
+
     private int nivel;
 
-    public int getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-
-    public Tarefa(String titulo, String descricao, LocalDate deadline, int nivel ) {
+    public Tarefa(String titulo, String descricao, LocalDate dataLimite){
         if (titulo.isEmpty() || descricao.isEmpty()){
             throw new NullPointerException();
         }
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.deadline = deadline;
-        this.nivel=nivel;
+        this.setTitulo(titulo);
+        this.setDescricao(descricao);
+        setDataLimite(dataLimite);
+        this.setNivel(atualizarNivel());
     }
-    public Tarefa(String titulo, String descricao, LocalDate deadline){
-        if (titulo.isEmpty() || descricao.isEmpty()){
-            throw new NullPointerException();
-        }
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.deadline = deadline;
-    }
-    public Tarefa(){
 
-    }
 
     public boolean equals(Tarefa outro) {
         return (outro.getId() == getId());
     }
 
     public String toString() {
-        return "Título da tarefa: " + titulo + ", Que dura até: " + deadline;
+        return "Título da tarefa: " + getTitulo() + ", Que dura até: " + getDataLimite();
     }
 
-    public String getTitulo() {
-        return titulo;
+    public int getNivel() {
+        return nivel;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setNivel(int n) {
+        nivel = n;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
+    public int atualizarNivel() {
+        LocalDate hoje = LocalDate.now();
+        long diasRestantes = ChronoUnit.DAYS.between(hoje, getDataLimite());
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        if (diasRestantes < 0) {
+            // Atrasado
+            return 6;
+        } else if (diasRestantes <= 1) {
+            // Inclui hoje (0 dias) e amanhã (1 dia)
+            // Crítico
+            return 5;
+        } else if (diasRestantes <= 7) {
+            // Urgente
+            return 4;
+        } else if (diasRestantes <= 30) {
+            // Atenção
+            return 3;
+        } else if (diasRestantes <= 90) {
+            // Normal
+            return 2;
+        } else {
+            // Baixo
+            return 1;
+        }
     }
-
-    public LocalDate getDeadline() {
-        return deadline;
     }
-
-    public void setDeadline(LocalDate deadline) {
-        this.deadline = deadline;
-    }
-
-    public long getId() {
-        return id;
-    }
-    
-}
