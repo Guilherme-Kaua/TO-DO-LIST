@@ -2,6 +2,7 @@ package Principais;
 
 import java.time.LocalDate;
 
+
 public class Evento extends DadosComuns{
 
     public Evento(String titulo, String descricao, LocalDate dataEvento){
