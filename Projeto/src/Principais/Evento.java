@@ -13,7 +13,7 @@ public class Evento extends DadosComuns{
             throw new NullPointerException();
         }
         if (dataEvento != null && dataEvento.isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("Data do evento não pode ser no passado");
+            throw new IllegalArgumentException("Data do evento não pode ser no passado!");
         }
 
         setTitulo(titulo);

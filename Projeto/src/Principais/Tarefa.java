@@ -30,7 +30,7 @@ public class Tarefa extends DadosComuns{
     }
 
     public String toString() {
-        return "Título da tarefa: " + getTitulo() + ", Que dura até: " + getDataLimite();
+        return "Título da  tarefa: " + getTitulo() + ", Que dura até: " + getDataLimite();
     }
 
     public int getNivel() {
