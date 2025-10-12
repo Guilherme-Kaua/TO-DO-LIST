@@ -1,7 +1,11 @@
 package Principais;
 
-import java.time.LocalDate;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+import java.time.LocalDate;
+@Entity
+@Table(name = "Eventos")
 public class Evento extends DadosComuns{
 
     public Evento(String titulo, String descricao, LocalDate dataEvento){

@@ -1,12 +1,21 @@
 package Principais;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@MappedSuperclass
 public abstract class DadosComuns {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id = System.currentTimeMillis();
+    @Column(nullable = false)
     private String titulo;
+    @Column
     private String descricao;
+    @Column
     private LocalDate DataLimite;
+    @Column
     private LocalDate DataCadastro = LocalDate.now();
 
 

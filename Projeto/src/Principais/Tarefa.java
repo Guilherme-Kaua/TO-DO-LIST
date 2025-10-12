@@ -1,12 +1,17 @@
 package Principais;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
-
+@Entity
+@Table(name = "Tarefas")
 public class Tarefa extends DadosComuns{
 
-
+    @Column
     private int nivel;
 
     public Tarefa(String titulo, String descricao, LocalDate dataLimite){
