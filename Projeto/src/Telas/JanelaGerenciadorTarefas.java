@@ -219,7 +219,7 @@ public class JanelaGerenciadorTarefas extends JFrame {
                 tableModel.addRow(new Object[]{
                         tarefa.getTitulo(),
                         tarefa.getDescricao(),
-                        tarefa.getDeadline().format(formatter),
+                        tarefa.getDataLimite().format(formatter),
                         tarefa.getNivel()
                 });
             }

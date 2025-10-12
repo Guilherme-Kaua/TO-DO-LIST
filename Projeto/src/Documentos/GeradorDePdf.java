@@ -17,7 +17,7 @@ public class GeradorDePdf {
 
         int contador = 0;
         for (Tarefa tarefa: tarefas.getTarefas()){
-            if (tarefa.getDeadline().equals(data)){
+            if (tarefa.getDataLimite().equals(data)){
                 contador++;
             }
         }
@@ -33,7 +33,7 @@ public class GeradorDePdf {
 
             doc.open();
             for(Tarefa t: tarefas.getTarefas()) {
-                if(t.getDeadline().equals(data)) {
+                if(t.getDataLimite().equals(data)) {
                     Paragraph pg = new Paragraph(t.toString());
                     doc.add(pg);
                 }
