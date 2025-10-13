@@ -6,24 +6,41 @@ import java.time.LocalDate;
 
 @MappedSuperclass
 public abstract class DadosComuns {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id = System.currentTimeMillis();
-    @Column(nullable = false)
+    private Long id;
+
+    @Column(name = "título", nullable = false, length = 100, unique = true)
     private String titulo;
-    @Column
+
+    @Column(name = "descrição")
     private String descricao;
-    @Column
-    private LocalDate DataLimite;
-    @Column
-    private LocalDate DataCadastro = LocalDate.now();
 
+    @Column(name = "data_limite",nullable = false)
+    private LocalDate dataLimite;
 
-    public long getId() {
+    @Column(name = "data_cadastro")
+    private LocalDate dataCadastro;
+
+    private LocalDate dataAtualizada;
+
+    @PrePersist
+    public void aoCriar(){
+        this.dataCadastro = LocalDate.now();
+        this.dataAtualizada = LocalDate.now();
+    }
+
+    @PreUpdate
+    public void aoAtualizar(){
+        this.dataAtualizada = LocalDate.now();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -43,19 +60,27 @@ public abstract class DadosComuns {
         this.descricao = descricao;
     }
 
-    public LocalDate getDataCadastro() {
-        return DataCadastro;
-    }
-
-    public void setDataCadastro(LocalDate dataCadastro) {
-        DataCadastro = dataCadastro;
-    }
-
     public LocalDate getDataLimite() {
-        return DataLimite;
+        return dataLimite;
     }
 
     public void setDataLimite(LocalDate dataLimite) {
-        DataLimite = dataLimite;
+        this.dataLimite = dataLimite;
+    }
+
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDate dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public LocalDate getDataAtualizada() {
+        return dataAtualizada;
+    }
+
+    public void setDataAtualizada(LocalDate dataAtualizada) {
+        this.dataAtualizada = dataAtualizada;
     }
 }
