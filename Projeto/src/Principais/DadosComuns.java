@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @MappedSuperclass
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class DadosComuns {
 
     @Id
@@ -17,8 +18,6 @@ public abstract class DadosComuns {
     @Column(name = "descrição")
     private String descricao;
 
-    @Column(name = "data_limite",nullable = false)
-    private LocalDate dataLimite;
 
     @Column(name = "data_cadastro")
     private LocalDate dataCadastro;
@@ -60,13 +59,6 @@ public abstract class DadosComuns {
         this.descricao = descricao;
     }
 
-    public LocalDate getDataLimite() {
-        return dataLimite;
-    }
-
-    public void setDataLimite(LocalDate dataLimite) {
-        this.dataLimite = dataLimite;
-    }
 
     public LocalDate getDataCadastro() {
         return dataCadastro;

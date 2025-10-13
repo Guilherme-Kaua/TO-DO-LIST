@@ -7,13 +7,14 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 @Entity
 @Table(name = "Eventos")
-public class Evento extends DadosComuns{
+public class Evento {
 
     public Evento(){
     }
 
     @Column(name = "data_evento",nullable = false,unique = true)
     private LocalDate dataLimite;
+
 
 
 

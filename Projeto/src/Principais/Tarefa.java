@@ -11,7 +11,11 @@ import java.util.Set;
 public class Tarefa extends DadosComuns{
 
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "tarefa",orphanRemoval = true)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY,
+            mappedBy = "tarefa")
     private Set<SubTarefa> subTarefas = new HashSet<>();
 
     @Column(nullable = false)
@@ -19,6 +23,10 @@ public class Tarefa extends DadosComuns{
 
     @Column(nullable = false)
     private Double percentual;
+
+    @Column(name = "data_limite",nullable = false)
+    private LocalDate dataLimite;
+
 
     private LocalDate dataConcretizacao;
 

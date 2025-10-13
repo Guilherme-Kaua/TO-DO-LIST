@@ -10,23 +10,15 @@ public class SubTarefa extends DadosComuns {
     @Column(name = "título",unique = true,nullable = false)
     private String titulo;
 
-    @Column(name = "descrição")
-    private String descricao;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tarefa_id")
-    private Tarefa tarefa;
 
-    @Column(name = "Status")
+
+    @Column(name = "Concluido")
     private Boolean status = false;
 
-    public Tarefa getTarefa() {
-        return tarefa;
-    }
 
-    public void setTarefa(Tarefa tarefa) {
-        this.tarefa = tarefa;
-    }
 
     public Boolean getStatus() {
         return status;
