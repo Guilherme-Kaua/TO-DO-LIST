@@ -7,8 +7,8 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 @Entity
 @Table(name = "Eventos")
-public class Evento {
-
+public class Evento extends DadosComuns{
+    private LocalDate dataEvento;
     public Evento(){
     }
 
@@ -16,6 +16,11 @@ public class Evento {
     private LocalDate dataLimite;
 
 
+    public Evento(String text, String text1, LocalDate deadline) {
+        super();
+    }
 
-
+    public LocalDate getDataEvento() {
+        return dataEvento;
+    }
 }
