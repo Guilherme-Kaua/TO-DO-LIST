@@ -14,8 +14,8 @@ public class Tarefa extends DadosComuns{
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true,
-            fetch = FetchType.LAZY,
-            mappedBy = "tarefa")
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "tarefa_id")
     private Set<SubTarefa> subTarefas = new HashSet<>();
 
     @Column(nullable = false)
@@ -24,7 +24,7 @@ public class Tarefa extends DadosComuns{
     @Column(nullable = false)
     private Double percentual;
 
-    @Column(name = "data_limite",nullable = false)
+    @Column(name = "data_limite", nullable = false)
     private LocalDate dataLimite;
 
 
@@ -57,7 +57,7 @@ public class Tarefa extends DadosComuns{
         this.prioridade = prioridade;
     }
 
-    public Double getPercentual() {
+    public Double getPercentual(Tarefa tarefa) {
         return percentual;
     }
 
