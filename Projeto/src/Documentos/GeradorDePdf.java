@@ -1,6 +1,5 @@
 package Documentos;
 
-import CRUD.ManipuladorDeTarefas;
 import Principais.Tarefa;
 import com.itextpdf.text.Document;
 

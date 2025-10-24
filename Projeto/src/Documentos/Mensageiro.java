@@ -1,6 +1,5 @@
 package Documentos;
 
-import CRUD.ManipuladorDeTarefas;
 import jakarta.mail.Session;
 
 import jakarta.mail.Message;

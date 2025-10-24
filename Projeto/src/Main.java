@@ -1,7 +1,6 @@
-import CRUD.ManipuladorDeTarefas;
-import Persistencia.JsonTarefa;
-import Principais.Tarefa;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.Scanner;
 
 
@@ -9,47 +8,19 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
-        JsonTarefa persistencia = new JsonTarefa();
-        ManipuladorDeTarefas central = new ManipuladorDeTarefas();
+        try {
+            // cria um arquivo meubanco.mv.db na pasta do projeto
+            Connection conn = DriverManager.getConnection("jdbc:h2:./meubanco", "sa", "");
+            Statement stmt = conn.createStatement();
 
-        loop:
-        while (true) {
-            System.out.println(
-                    "1 - nova tarefa\n" +
-                            "2 - listar todas as tarefas\n" +
-                            "3 - exibir informações de uma tarefa específica\n" +
-                            "4 - gerar relatório de tarefas de um dia específico\n" +
-                            "5 - enviar email com PDF\n" +
-                            "s - sair"
-            );
+            stmt.execute("CREATE TABLE IF NOT EXISTS pessoas (id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(255))");
+            stmt.execute("INSERT INTO pessoas (nome) VALUES ('Guilherme'), ('Kauã')");
 
-            String escolha = input.nextLine();
-
-            switch (escolha) {
-                case "1":
-                    System.out.println("Digite o título:");
-                    String t = input.nextLine();
-
-                    System.out.println("Digite a descrição:");
-                    String d = input.nextLine();
-                    Tarefa tarefa = new Tarefa(t, d);
-                    central.adicionarTarefa(tarefa);
-                    break;
-
-                case "2":
-                    persistencia.carregarTarefas().listarTarefas();
-
-                    break;
-                case "s":
-                    input.close();
-                    persistencia.salvarTarefas(central);
-                    System.out.println("Obrigado por usar. Saindo...");
-                    break loop;
-
-                default:
-                    System.out.println("Opção inválida.\n");
-                    break;
-            }
+            conn.close();
+            System.out.println("Banco salvo com sucesso!");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 }

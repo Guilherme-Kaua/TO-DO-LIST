@@ -16,7 +16,7 @@ public abstract class ItemAgenda {
     public abstract Object recuperarPorId (long id);
 
 
-    public void listarEventos(ArrayList<?> lista) {
+    public void listar(ArrayList<?> lista) {
         lista.forEach(System.out::println);
     }
 
