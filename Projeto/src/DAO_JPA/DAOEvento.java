@@ -2,6 +2,7 @@ package DAO_JPA;
 
 import Principais.Evento;
 
+import java.util.List;
 import java.util.Set;
 
 public interface DAOEvento {
@@ -9,8 +10,8 @@ public interface DAOEvento {
     void salvar(Evento evento);
 
     // READ
-    Set<Evento> listarTodos();
-    Evento buscarPorId(Long id);
+    List<Evento> listar();
+    Evento buscar(Long id);
 
     // UPDATE
     void atualizar(Evento evento);

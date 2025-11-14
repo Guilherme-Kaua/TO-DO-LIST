@@ -1,19 +1,18 @@
 package DAO_JPA;
 
-
-import Utils.JPAUtil;
-import jakarta.persistence.EntityManager;
-
 public class DaoFactory {
 
-    private final EntityManager em = JPAUtil.getEntityManager();
-
-    public static DAOTarefa criarTarefaDAO(){
-        return new DAOTarefaImpl();
+    private DaoFactory() {
+        // impede instanciação
     }
 
-    public static DAOEvento criarEventoDAO(){
-        return new DAOEventoImpl();
+    public static DAOTarefa criarTarefaDAO() {
+        DAOTarefa daoReal = new DAOTarefaImpl();
+        return new ProxyTarefa(daoReal);
     }
 
+    public static DAOEvento criarEventoDAO() {
+        DAOEvento daoReal = new DAOEventoImpl();
+        return new ProxyEvento(daoReal);
+    }
 }
