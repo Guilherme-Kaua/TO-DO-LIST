@@ -1,0 +1,11 @@
+<CRUD.ManipuladorDeTarefas>
+  <todasAsTarefas>
+    <Principais.Tarefa>
+      <id>1754624740782</id>
+      <titulo>TESTANDO</titulo>
+      <descricao>DE madrugada essa poha </descricao>
+      <deadline>2025-08-08</deadline>
+      <nivel>5</nivel>
+    </Principais.Tarefa>
+  </todasAsTarefas>
+</CRUD.ManipuladorDeTarefas>

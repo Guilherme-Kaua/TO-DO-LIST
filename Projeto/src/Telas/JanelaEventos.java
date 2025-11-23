@@ -97,7 +97,12 @@ public class JanelaEventos extends JFrame {
     }
 
     private void configurarEventos() {
-        botaoSair.addActionListener(e -> System.exit(0));
+        abas.addChangeListener(e -> {
+            int index = abas.getSelectedIndex();
+            if ("Sair".equals(abas.getTitleAt(index))) {
+                System.exit(0);
+            }
+        });
 
         botaoAdicionar.addActionListener(e -> {
             // Lógica para adicionar novo evento
