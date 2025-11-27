@@ -1,5 +1,6 @@
 package Telas;
 
+import Importantes.RedisManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -74,7 +75,7 @@ public class JanelaCadastro extends JFrame {
     }
 
     private void configurarEventos() {
-       //apertar enter muda o campo
+        //apertar enter muda o campo
         jtNome.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 jtEmail.requestFocus();
@@ -84,23 +85,26 @@ public class JanelaCadastro extends JFrame {
 
         botaoCadastrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Lógica para cadastrar o usuário
                 String nome = jtNome.getText();
                 String email = jtEmail.getText();
-
 
                 if(nome.isEmpty() || email.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
-                    // Aqui você poderia chamar um método para salvar os dados
+                    // Verifica se o email já existe no Redis
+                    if(RedisManager.emailJaExiste(email)) {
+                        JOptionPane.showMessageDialog(null, "Email já cadastrado!");
+                    } else {
+                        // Salva o novo usuário no Redis
+                        RedisManager.salvarUsuario(email, nome);
+                        JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+                        dispose();
+                        new JanelaLogin().setVisible(true);
+                    }
                 }
-                dispose();
-                new JanelaLogin().setVisible(true);
             }
         });
     }
-
 
     public String getNome() {
         return jtNome.getText();

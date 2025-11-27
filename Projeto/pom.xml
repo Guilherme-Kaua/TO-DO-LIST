@@ -32,6 +32,11 @@
             <version>5.5.13.3</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>4.4.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

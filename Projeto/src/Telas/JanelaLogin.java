@@ -1,5 +1,7 @@
 package Telas;
 
+import Importantes.RedisManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -94,14 +96,17 @@ public class JanelaLogin extends JFrame {
                 if(nome.isEmpty() || email.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
                 } else {
-                  //Login
-                    JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
-                    dispose();
-                    new Menu().setVisible(true);
-
+                    if(RedisManager.validarLogin(email)) {
+                        JOptionPane.showMessageDialog(null, "Login realizado com sucesso!");
+                        dispose();
+                        new Menu().setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Email ou senha inválidos!");
+                    }
                 }
             }
         });
+
 
 
         botaoCadastrar.addActionListener(new ActionListener() {
